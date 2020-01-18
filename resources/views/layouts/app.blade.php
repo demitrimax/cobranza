@@ -186,7 +186,9 @@ if (Auth::check()) {
         </ul>
     </div>
   </div>
-  @yield('content')
+  <div id="page-wrapper">
+    @yield('content')
+  </div>
   <footer class="footer text-center"> {{ date('Y') }} &copy; Impulsa Todos los derechos reservados </footer>
 </div>
 <!-- /#wrapper -->

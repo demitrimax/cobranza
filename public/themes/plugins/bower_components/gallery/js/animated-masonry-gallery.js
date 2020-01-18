@@ -7,7 +7,7 @@ var normal_size_class = "gallery-content-center-normal";
 var full_size_class = "gallery-content-center-full";
 var $container = $('#gallery-content-center');
     
-$container.isotope({itemSelector : 'img'});
+//$container.isotope({itemSelector : 'img'});
 
 
 function check_button(){

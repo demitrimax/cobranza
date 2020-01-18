@@ -475,7 +475,7 @@ Route::post("/admin/expediente_digital/validar_expediente", "admin\Expediente_di
 
 //Home
 Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@home');
 Route::get('/admin/home', 'HomeController@index');
 //Home
 

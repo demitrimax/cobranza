@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-  <!-- Page Content -->
-  <div id="page-wrapper">
+
     <div class="container-fluid">
       <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -226,7 +225,7 @@
               <table class="table ">
                 <thead>
                   <tr>
-                    
+
                     <th>NAME</th>
                     <th>STATUS</th>
                     <th>DATE</th>
@@ -235,49 +234,49 @@
                 </thead>
                 <tbody>
                   <tr>
-                    
+
                     <td class="txt-oflo">Elite admin</td>
                     <td><span class="label label-megna label-rounded">SALE</span> </td>
                     <td class="txt-oflo">April 18</td>
                     <td><span class="text-success">$24</span></td>
                   </tr>
                   <tr>
-                    
+
                     <td class="txt-oflo">Real Homes</td>
                     <td><span class="label label-info label-rounded">EXTENDED</span></td>
                     <td class="txt-oflo">April 19</td>
                     <td><span class="text-info">$1250</span></td>
                   </tr>
                   <tr>
-                    
+
                     <td class="txt-oflo">Medical Pro</td>
                     <td><span class="label label-danger label-rounded">TAX</span></td>
                     <td class="txt-oflo">April 20</td>
                     <td><span class="text-danger">-$24</span></td>
                   </tr>
                   <tr>
-                    
+
                     <td class="txt-oflo">Hosting press</td>
                     <td><span class="label label-megna label-rounded">SALE</span></td>
                     <td class="txt-oflo">April 21</td>
                     <td><span class="text-success">$24</span></td>
                   </tr>
                   <tr>
-                    
+
                     <td class="txt-oflo">Helping Hands</td>
                     <td><span class="label label-success label-rounded">MEMBER</span></td>
                     <td class="txt-oflo">April 22</td>
                     <td><span class="text-success">$24</span></td>
                   </tr>
                   <tr>
-                    
+
                     <td class="txt-oflo">Digital Agency</td>
                     <td><span class="label label-megna label-rounded">SALE</span> </td>
                     <td class="txt-oflo">April 23</td>
                     <td><span class="text-danger">-$14</span></td>
                   </tr>
                   <tr>
-                    
+
                     <td class="txt-oflo">Helping Hands</td>
                     <td><span class="label label-success label-rounded">MEMBER</span></td>
                     <td class="txt-oflo">April 22</td>
@@ -412,7 +411,7 @@
                 <h5>Genelia Deshmukh</h5>
                 <span class="mail-desc">I love to do acting and dancing</span> <span class="time">9:08 AM</span> </div>
               </a> <a href="#" class="b-none">
-              <div class="user-img"> 
+              <div class="user-img">
                 <img src=
                 "{{ asset('themes/plugins/images/users/pawandeep.jpg') }}"
                 alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
@@ -500,7 +499,7 @@
                   <label for="checkbox2"> Fix Sidebar </label>
                 </div>
               </li>
-              
+
             </ul>
             <ul id="themecolors" class="m-t-20">
               <li><b>With Light sidebar</b></li>
@@ -554,6 +553,5 @@
       <!-- /.right-sidebar -->
     </div>
     <!-- /.container-fluid -->
-    <footer class="footer text-center"> 2017 &copy; Elite Admin brought to you by themedesigner.in </footer>
-  </div>
+
 @endsection
