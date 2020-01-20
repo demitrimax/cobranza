@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
-<div id="page-wrapper">
   <div class="container-fluid">
 
       <div class="row bg-title">
@@ -44,7 +43,7 @@
             <input type="hidden" name="user_id" value="<?php echo $user->id; ?>">
             <input type="hidden" name="id" value="<?php echo $data->id; ?>">
 
-            @include('admin.asesores.form')            
+            @include('admin.asesores.form')
           </div>
         </form>
     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -12,7 +12,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 
 <!-- Page Content -->
-<div id="page-wrapper">
 
   <div class="container-fluid">
 
@@ -184,7 +183,7 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 		                      <th>
                             <a href="<?php echo url("/"); ?>/admin/roles/edit/<?php echo $value->id; ?>" title="Editar prospecto" style="cursor:pointer">
-                              <i class="fa fa-edit fa-lg text-info m-r-10"></i>   
+                              <i class="fa fa-edit fa-lg text-info m-r-10"></i>
                             </a>
 
                             <a href="javascript:ejecutaLink('<?php echo url('admin/roles/baja') . '/' . $value->id; ?>')" title="Eliminar Registro" style="cursor:pointer">

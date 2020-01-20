@@ -140,8 +140,10 @@ class CreditosController extends Controller
         );
 
         $data = $creditos->getCreditosData($per_page, $searchBy, $searchValue, $sortBy, $order,4);
+        $searchFields = ['creditos.folio'=>'Folio', 'clientes.nombre' => 'Nombre Cliente', 'clientes.paterno'=>'a paterno Cliente', 'clientes.materno'=>'a materno Cliente' ];
 
-        return view('admin/creditos/pagados', ['data'=>$data->appends(Input::except('page')), 'per_page'=>$per_page, 'links'=>$links,'config'=>$config]);
+
+        return view('admin/creditos/pagados', ['data'=>$data->appends(Input::except('page')), 'per_page'=>$per_page, 'links'=>$links,'config'=>$config, 'sfields' => $searchFields ]);
     }
 
     public function vencidos(Request $request){
@@ -203,8 +205,10 @@ class CreditosController extends Controller
         );
 
         $data = $creditos->getCreditosData($per_page, $searchBy, $searchValue, $sortBy, $order,3);
+        $searchFields = ['creditos.folio'=>'Folio', 'clientes.nombre' => 'Nombre Cliente', 'clientes.paterno'=>'a paterno Cliente', 'clientes.materno'=>'a materno Cliente' ];
 
-        return view('admin/creditos/pagados', ['data'=>$data->appends(Input::except('page')), 'per_page'=>$per_page, 'links'=>$links,'config'=>$config]);
+
+        return view('admin/creditos/pagados', ['data'=>$data->appends(Input::except('page')), 'per_page'=>$per_page, 'links'=>$links,'config'=>$config, 'sfields'=>$searchFields]);
     }
 
 

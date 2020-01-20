@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+﻿@extends('layouts.app2')
 
 @section('content')
 
@@ -12,7 +12,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 
 <!-- Page Content -->
-<div id="page-wrapper">
 
   <div class="container-fluid">
 
@@ -226,6 +225,7 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
   </div>
 
 </div>
+
 <div class="modal fade" id="modalSearch" tabindex="10" role="dialog" aria-labelledby="modalVistaDocumentoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -282,9 +282,10 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
         </div>
     </div>
 </div>
+@endsection
 
+@section('scripts')
 <script>
-
 
 $('.table-responsive').on('show.bs.dropdown', function () {
 

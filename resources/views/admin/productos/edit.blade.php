@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
-<div id="page-wrapper">
+
   <div class="container-fluid">
 
       <div class="row bg-title">

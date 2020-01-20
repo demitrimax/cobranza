@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -12,7 +12,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 
 <!-- Page Content -->
-<div id="page-wrapper">
 
   <div class="container-fluid">
 
@@ -34,7 +33,7 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
           <div class="white-box">
 
             <div class="pull-left">
-                <button class="btn btn-default" data-toggle="modal" title="Imprimir Listado" data-target="#frmFiltro">
+                <button class="btn btn-default" data-toggle="modal" title="Imprimir Listado" data-target="#modalSearch">
                   <i class="fa fa-search fa-2x"></i><br/>Buscar
                 </button>
             </div>
@@ -226,6 +225,65 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
   </div>
 
 </div>
+<div class="modal fade" id="modalSearch" tabindex="10" role="dialog" aria-labelledby="modalVistaDocumentoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalVistaDocumentoLabel"> Filtrar Resultados </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+              <form method="GET" action="" class="" id="frmSearch">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="participante_id" class="control-label"> Buscar por: </label>
+
+                        {!! Form::select('searchBy', $sfields, null, ['class'=>'form-control selectpicker']) !!}
+                     </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="participante_id" class="control-label"> Informacion a Buscar: </label>
+                        <input type="text" name="searchValue" id="searchValue" class="form-control" value="<?php echo $searchValue; ?>">
+                     </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="participante_id" class="control-label"> Ver: </label>
+                        <select name="per_page" class="form-control selectpicker" onchange="this.form.submit()">
+                          <option value="20" <?php echo $per_page=="25"?'selected="selected"':""; ?>>25 Registros</option>
+                          <option value="50" <?php echo $per_page=="50"?'selected="selected"':""; ?>>50 Registros</option>
+                          <option value="100" <?php echo $per_page=="100"?'selected="selected"':""; ?>>100 Registros</option>
+                        </select>
+                     </div>
+
+                  </div>
+
+                  <div class="col-md-12 text-right">
+                    <button  class="btn btn-default" title="Imprimir Listado" onclick="$('#frmSearch').submit();">
+                      <i class="fa fa-search fa-2x"></i><br/>Aplicar
+                    </button>
+                  </div>
+
+                </div>
+
+              </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
 <script>
 
 

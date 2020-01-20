@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
-<div id="page-wrapper">
   <div class="container-fluid">
 
       <div class="row bg-title">
@@ -16,9 +15,9 @@
       </div>
 
       <div class="row">
-        <form action="<?php echo url('/'); ?>/admin/agentes/edit" id="formValidation" method="post" enctype="multipart/form-data">
+        <form class="form" action="<?php echo url('/'); ?>/admin/agentes/edit" id="formValidation" method="post" enctype="multipart/form-data">
 
-          <div class="col-sm-12">
+          <div class="col-md-12">
 
             <div class="white-box">
 

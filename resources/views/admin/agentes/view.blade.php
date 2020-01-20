@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
-<div id="page-wrapper">
   <div class="container-fluid">
 
       <div class="row bg-title">
@@ -49,7 +48,7 @@
 											</tr>
 										    <!-- Asesor_id End -->
 
-											
+
 															<tr>
 															 <td>
 															   <label for="nombre" class="col-sm-3 control-label"> Nombre </label>
