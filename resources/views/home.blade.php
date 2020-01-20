@@ -20,40 +20,7 @@
               <div class="row">
 
                 <div id="bar-chart-prospectos"></div>
-                <script>
 
-                  // Morris bar chart
-                  Morris.Bar({
-                     element: 'bar-chart-prospectos',
-                     data: [
-                       {y: 'Total', a: <?php echo  (int)$prospectaciones['total']; ?>, b: null, c:null,d:null,e : null},
-                       {y: 'Pendientes', a: null, b: <?php echo  (int)$prospectaciones['pendientes']; ?>, c:null,d:null,e : null},
-                       {y: 'Rechazados', a: null, b: null, c: <?php echo  (int)$prospectaciones['rechazados']; ?>, d:null,e : null},
-                       {y: 'Eliminados', a: null, b: null, c: null, d: <?php echo (int)$prospectaciones['eliminados']; ?>,e : null},
-                       {y: 'Aprobados', a: null, b: null, c: null, d: null, e: <?php echo (int)$prospectaciones['clientes']; ?>},
-
-                     ],
-                     xkey: 'y',
-                     ykeys: ['a','b','c','d','e'],
-                     labels: ['Total', 'Pendientes', 'Rechazados','Eliminados','Aprobados'],
-                     barColors:['#ab8ce4', '#03a9f3', '#fec107','#fb9678','#00c292'],
-                     stacked: true,
-                     hoverCallback: function (index, options, content, row) {
-                       var finalContent = $(content);
-                       var cpt = 0;
-
-                       $.each(row, function (n, v) {
-                         if (v == null) {
-                           $(finalContent).eq(cpt).empty();
-                         }
-                         cpt++;
-                       });
-
-                       return finalContent;
-                     }
-                  });
-
-                </script>
 
               </div>
 
@@ -75,40 +42,7 @@
               <div class="row">
 
                 <div id="bar-chart-solicitudes"></div>
-                <script>
 
-                  // Morris bar chart
-                  Morris.Bar({
-                     element: 'bar-chart-solicitudes',
-                     data: [
-                       {y: 'Total', a: <?php echo  (int)$solicitar['total']; ?>, b: null, c:null,d:null,e : null},
-                       {y: 'Pendientes', a: null, b: <?php echo  (int)$solicitar['pendientes']; ?>, c:null,d:null,e : null},
-                       {y: 'En Proceso', a: null, b: null, c: <?php echo  (int)$solicitar['proceso']; ?>, d:null,e : null},
-                       {y: 'P. Fondeo', a: null, b: null, c: null, d: <?php echo (int)$solicitar['no_fondeo']; ?>,e : null},
-                       {y: 'Creditos', a: null, b: null, c: null, d: null,e : <?php echo (int)$solicitar['credito']; ?>},
-
-                     ],
-                     xkey: 'y',
-                     ykeys: ['a','b','c','d','e'],
-                     labels: ['Total', 'Pendientes','En Proceso','Pendiente de Fondeo','Creditos Activos'],
-                     barColors:['#ab8ce4', '#fec107', '#03a9f3','#56c9d1','#00c292'],
-                     stacked: true,
-                     hoverCallback: function (index, options, content, row) {
-                       var finalContent = $(content);
-                       var cpt = 0;
-
-                       $.each(row, function (n, v) {
-                         if (v == null) {
-                           $(finalContent).eq(cpt).empty();
-                         }
-                         cpt++;
-                       });
-
-                       return finalContent;
-                     }
-                  });
-
-                </script>
 
               </div>
 
@@ -304,10 +238,74 @@
 
   </div>
 
+@endsection
+
+@section('scripts')
+<script>
+
+  // Morris bar chart
+  Morris.Bar({
+     element: 'bar-chart-prospectos',
+     data: [
+       {y: 'Total', a: <?php echo  (int)$prospectaciones['total']; ?>, b: null, c:null,d:null,e : null},
+       {y: 'Pendientes', a: null, b: <?php echo  (int)$prospectaciones['pendientes']; ?>, c:null,d:null,e : null},
+       {y: 'Rechazados', a: null, b: null, c: <?php echo  (int)$prospectaciones['rechazados']; ?>, d:null,e : null},
+       {y: 'Eliminados', a: null, b: null, c: null, d: <?php echo (int)$prospectaciones['eliminados']; ?>,e : null},
+       {y: 'Aprobados', a: null, b: null, c: null, d: null, e: <?php echo (int)$prospectaciones['clientes']; ?>},
+
+     ],
+     xkey: 'y',
+     ykeys: ['a','b','c','d','e'],
+     labels: ['Total', 'Pendientes', 'Rechazados','Eliminados','Aprobados'],
+     barColors:['#ab8ce4', '#03a9f3', '#fec107','#fb9678','#00c292'],
+     stacked: true,
+     hoverCallback: function (index, options, content, row) {
+       var finalContent = $(content);
+       var cpt = 0;
+
+       $.each(row, function (n, v) {
+         if (v == null) {
+           $(finalContent).eq(cpt).empty();
+         }
+         cpt++;
+       });
+
+       return finalContent;
+     }
+  });
 
 
+    // Morris bar chart
+    Morris.Bar({
+       element: 'bar-chart-solicitudes',
+       data: [
+         {y: 'Total', a: <?php echo  (int)$solicitar['total']; ?>, b: null, c:null,d:null,e : null},
+         {y: 'Pendientes', a: null, b: <?php echo  (int)$solicitar['pendientes']; ?>, c:null,d:null,e : null},
+         {y: 'En Proceso', a: null, b: null, c: <?php echo  (int)$solicitar['proceso']; ?>, d:null,e : null},
+         {y: 'P. Fondeo', a: null, b: null, c: null, d: <?php echo (int)$solicitar['no_fondeo']; ?>,e : null},
+         {y: 'Creditos', a: null, b: null, c: null, d: null,e : <?php echo (int)$solicitar['credito']; ?>},
 
+       ],
+       xkey: 'y',
+       ykeys: ['a','b','c','d','e'],
+       labels: ['Total', 'Pendientes','En Proceso','Pendiente de Fondeo','Creditos Activos'],
+       barColors:['#ab8ce4', '#fec107', '#03a9f3','#56c9d1','#00c292'],
+       stacked: true,
+       hoverCallback: function (index, options, content, row) {
+         var finalContent = $(content);
+         var cpt = 0;
 
+         $.each(row, function (n, v) {
+           if (v == null) {
+             $(finalContent).eq(cpt).empty();
+           }
+           cpt++;
+         });
 
+         return finalContent;
+       }
+    });
+
+</script>
 
 @endsection
