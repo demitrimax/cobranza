@@ -173,7 +173,7 @@
                     <hr/>
 
               <div class="row">
-                
+
 
                        <div class="white-box">
 
@@ -288,7 +288,7 @@
                                      </table>
                                    </div>
                                    <div class="col-md-5 pull-right">
-                                       <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
+                                       <p></p>
                                    </div>
                                    <div class="clearfix"></div>
                                </div>
