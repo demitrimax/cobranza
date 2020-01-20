@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -12,7 +12,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 
 <!-- Page Content -->
-<div id="page-wrapper">
 
   <div class="container-fluid">
 
@@ -145,7 +144,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
   </div>
 
-</div>
 
 <div class="modal fade" id="modalSearch" tabindex="10" role="dialog" aria-labelledby="modalVistaDocumentoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -229,7 +227,9 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
     </div>
 </div>
 
+@endsection
 
+@section('scripts')
 <script>
 $('#btnFilter').on('click',function(){
 
@@ -247,6 +247,4 @@ $('#clearFilter').on('click',function(){
 
 });
 </script>
-
-
 @endsection

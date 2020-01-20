@@ -53,7 +53,7 @@ if (Auth::check()) {
 <link href="{{ asset('themes/plugins/bower_components/sweetalert/sweetalert.css') }}" rel="stylesheet">
 
 <!-- Dropify CSS -->
-<link href="{{ asset('themes/plugins//bower_components/dropify/dist/css/dropify.css') }}" rel="stylesheet">
+<link href="{{ asset('themes/plugins/bower_components/dropify/dist/css/dropify.css') }}" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -62,6 +62,9 @@ if (Auth::check()) {
 
 <!-- Calendar CSS -->
 <link href="{{ asset('themes/plugins/bower_components/calendar/dist/fullcalendar.css') }}" rel="stylesheet" />
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
 
   @yield('css')
     <script>
@@ -77,7 +80,7 @@ if (Auth::check()) {
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-    ga('create', 'UA-19175540-9', 'auto');
+    ga('create', 'UA-28175917-1', 'auto');
     ga('send', 'pageview');
     </script>
     <script>
@@ -88,7 +91,7 @@ if (Auth::check()) {
 
 </head>
 
-<body>
+<body class="skin-blue fixed-layout">
     <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
@@ -178,20 +181,7 @@ if (Auth::check()) {
     <script src="{{asset('themes/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
     <script src="{{asset('themes/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js')}}"></script>
     <script src="{{asset('themes/plugins/bower_components/toast-master/js/jquery.toast.js')}}"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $.toast({
-            heading: 'Welcome to Elite admin',
-            text: 'Use the predefined ones, or specify a custom position object.',
-            position: 'top-right',
-            loaderBg: '#ff6849',
-            icon: 'info',
-            hideAfter: 3500,
 
-            stack: 6
-        })
-    });
-    </script>
     <!--Style Switcher -->
     <script src="{{asset('themes/plugins/bower_components/styleswitcher/jQuery.style.switcher.js')}}"></script>
     <!-- datepicker JavaScript -->
@@ -208,7 +198,11 @@ if (Auth::check()) {
 
     <script src="{{ asset('themes/plugins/bower_components/switchery/dist/switchery.min.js') }}"></script>
 
-    <script src="{{ asset('themes/plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('themes/plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}" type="text/javascript"></script> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
 
     <script src="{{ asset('themes/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}" ></script>
 
@@ -223,8 +217,9 @@ if (Auth::check()) {
 
     <script src="{{ asset('js/config_datatable.js') }}"></script>
     <!-- jQuery -->
+    <!--
     <script src="{{ asset('themes/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
-
+    -->
     <!-- Dropify JS -->
     <script src="{{ asset('themes/plugins//bower_components/dropify/dist/js/dropify.min.js') }}"></script>
 
@@ -247,6 +242,7 @@ if (Auth::check()) {
     <script src="{{ asset('themes/plugins/bower_components/calendar/dist/jquery.fullcalendar.js') }}"></script>
 
     <!-- start - This is for export functionality only -->
+    <!--
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -256,58 +252,27 @@ if (Auth::check()) {
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script type="text/javascript" src="{{ asset('themes/plugins/limitkeypress/limitkeypress.js') }}"></script>
     <script type="text/javascript" src="{{ asset('themes/plugins/elevatezoom/jquery.elevateZoom-3.0.8.min.js') }}"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $.toast({
+            heading: 'Welcome to Elite admin',
+            text: 'Use the predefined ones, or specify a custom position object.',
+            position: 'top-right',
+            loaderBg: '#ff6849',
+            icon: 'info',
+            hideAfter: 3500,
+
+            stack: 6
+        })
+    });
+    </script>
+  -->
 
     <script type="text/javascript">
+
        $(document).ready(function() {
 
-         $('.display').DataTable({
-           dom: 'lBfrtip',
-           "paging": false,
-           "language": {
-                 "lengthMenu": "Ver _MENU_ Registros / Pagina",
-                 "zeroRecords": "No se encontraron registros",
-                 "info": "Viendo Pagina _PAGE_ de _PAGES_",
-                 "search": "Buscar: ",
-                 "infoEmpty": "No hay registros a visualizar",
-                 "infoFiltered": "(filtered from _MAX_ total records)",
-                 "infoFiltered": "(filtered from _MAX_ total records)",
-                 "paginate": {
-                   "previous": "Anterior",
-                   "next": "Siguiente",
-                   "last": "Ultimo",
-                   "first": "Primero",
-                 }
-             },
-             buttons: [
-                  {
-                      extend: 'copyHtml5',
-                      exportOptions: {
-                       columns: ':contains("Office")'
-                     },
-                     orientation: 'landscape',
-                     pageSize: 'LEGAL',
-                  },
-                  'excelHtml5',
-                  'csvHtml5',
-                  'pdfHtml5',
-                  'copyHtml5',
-                  'print'
-              ]
-        });
 
-
-        $.fn.datepicker.dates['es-MX'] = {
-            days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
-            daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
-            daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
-            months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-            monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-            today: "Hoy",
-            clear: "Limpiar",
-            format: 'dd-mm-yyyy',
-            titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
-            weekStart: 0
-        };
           // var date  = new Date().toJSON().slice(0,10).split('-').reverse().join('/')
 
           // Translated

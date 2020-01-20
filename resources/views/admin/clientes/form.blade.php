@@ -20,11 +20,11 @@
 				<div class="row">
           <!-- CURP Start -->
 					<div class="col-md-3">
-					<div class="form-group has-danger">
+					<div class="form-group">
 					     <label for="curp" class="control-label"> CURP </label> <span class="text-danger">*</span>
 					      <input type="text" class="form-control" id="curp" name="curp"
 					      value="{!! isset($data->curp ) ? $data->curp  : old('curp') !!}" maxlength="18" onchange="validarInput(this)">
-                <small class="form-control-feedback callout" id="resultado"> </small>
+                <div class="form-control-feedback" id="resultado"></div>
           <div class="label label-danger">{{ $errors->first("curp") }}</div>
                     <input type="hidden" class="form-control" id="curpdat" name="curpdat" value="">
 					</div>
@@ -462,8 +462,8 @@
 		</div>
 	</div>
 </div>
-
-<script>
+@section('scripts')
+  <script>
 
   var valor_cobro = 0;
   var tipo_cobro  = 0;
@@ -1274,46 +1274,47 @@
     return [year, month, day].join('-');
 }
 
-function curpGenero(curp) {
-  var m = curp;
-  //miFecha = new Date(año,mes,dia)
-  var genero = m.substr(10,1);
-  return genero;
-}
+  function curpGenero(curp) {
+    var m = curp;
+    //miFecha = new Date(año,mes,dia)
+    var genero = m.substr(10,1);
+    return genero;
+  }
 
-function buscarTelefonoDuplicado(campo) {
-  var mitelefono = $(campo).val();
+  function buscarTelefonoDuplicado(campo) {
+    var mitelefono = $(campo).val();
 
-  $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-  //Buscar los telefonos duplicados
-  $.ajax({
-    url: " {{url('/admin/clientes/telefonos/duplicados')}}",
-    dataType: 'json',
-    type: "POST",
-    data: {'telefono': mitelefono },
-    success: function(json) {
-      console.log(json);
+    $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+    //Buscar los telefonos duplicados
+    $.ajax({
+      url: " {{url('/admin/clientes/telefonos/duplicados')}}",
+      dataType: 'json',
+      type: "POST",
+      data: {'telefono': mitelefono },
+      success: function(json) {
+        console.log(json);
 
-      if(json['error'] && !json['cliente'] == {!! $data->id !!} ) {
+        if(json['error'] && !json['cliente'] == {!! $data->id !!} ) {
 
-          swal({ title: "ERROR!!", text: json['msg'], type: "error"});
+            swal({ title: "ERROR!!", text: json['msg'], type: "error"});
 
-          $('.btn-save').fadeOut();
-        } else {
-            $('.btn-save').show();
+            $('.btn-save').fadeOut();
+          } else {
+              $('.btn-save').show();
+          }
+
         }
 
-      }
+      }); //AJAX END
 
-    }); //AJAX END
-
-}
+  }
 
 </script>
 <!-- src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyBpZATF1F7TFEPCMxIx8nOPD0Ryi3V0BsE&callback=initMap" -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv4GHAnI4evPz2WDIBoJ8YnEYU7DAyIPU&libraries=places&callback=initMap">
 </script>
+@endsection

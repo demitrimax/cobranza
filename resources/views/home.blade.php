@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-  <div id="page-wrapper">
   <div class="container-fluid">
 
     <div class="row bg-title">
@@ -306,7 +304,7 @@
 
   </div>
 
-</div>
+
 
 
 

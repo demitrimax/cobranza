@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
-<div id="page-wrapper">
+
   <div class="container-fluid">
 
       <div class="row bg-title">
@@ -40,8 +40,11 @@
 
           </div>
 
-          <div class="col-md-12">
+
+
+          <div class="col-sm-12">
             {{ csrf_field() }}
+
 
             @include('admin.solicitudes.form')
           </div>
@@ -73,6 +76,6 @@
 
 
   </div>
-</div>
+
 
 @endsection
