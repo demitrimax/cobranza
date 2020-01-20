@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -12,7 +12,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 
 <!-- Page Content -->
-<div id="page-wrapper">
 
   <div class="container-fluid">
 
@@ -88,46 +87,46 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 						<td>Monto</td>
 						<td>Observaciones</td>
 						<td>Status</td>
-						
+
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php foreach($data as $value) { ?>
                         <tr id="hide<?php $value->id; ?>" >
-                          
+
             <th>
             {{{ $value->id }}}
             </th>
-                
+
             <th>
             {{{ $value->solicitud_id }}}
             </th>
-                
+
             <th>
             {{{ $value->user_id }}}
             </th>
-                
+
             <th>
             {{{ $value->fecha }}}
             </th>
-                
+
             <th>
             {{{ $value->cuenta_origen }}}
             </th>
-                
+
             <th>
             {{{ $value->cuenta_destino }}}
             </th>
-                
+
             <th>
             {{{ $value->monto }}}
             </th>
-                
+
             <th>
             {{{ $value->observaciones }}}
             </th>
-                
+
             <th>
             {{{ $value->status }}}
             </th>

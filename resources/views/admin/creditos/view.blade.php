@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
-<div id="page-wrapper">
   <div class="container-fluid">
 
       <div class="row bg-title">
@@ -174,245 +173,180 @@
                     <hr/>
 
               <div class="row">
-                <ul class="nav nav-tabs tabs customtab">
-                  <li class="tab active">
-                      <a href="#home" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-table"></i></span> <span class="hidden-xs">Tabla de amortización</span> </a>
-                  </li>
-                  <li class="tab">
-                      <a href="#biography" data-toggle="tab" aria-expanded="true"> <span class="visible-xs"><i class="fa fa-money"></i></span> <span class="hidden-xs">Transacciones</span> </a>
-                  </li>
-                  <li class="tab">
-                      <a href="#solicitud" data-toggle="tab" aria-expanded="true"> <span class="visible-xs"><i class="fa fa-edit"></i></span> <span class="hidden-xs">Solicitud de crédito</span> </a>
-                  </li>
-                  <li class="tab">
-                      <a href="#documents" data-toggle="tab" aria-expanded="true"> <span class="visible-xs"><i class="fa fa-file"></i></span> <span class="hidden-xs">Expediente</span> </a>
-                  </li>
-                </ul>
-                <div class="tab-content">
-                  <!-- .tabs 1 -->
-                  <div class="tab-pane active" id="home">
+                
 
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th class="text-center">#</th>
-                          <th class="text-center">Saldo inicial</th>
-                          <th class="text-center">Monto a pagar</th>
-                          <th class="text-center">Pago aplicado</th>
-                          <th class="text-center">Saldo final</th>
-                          <th class="text-center">F. Pago</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php $i = 1; ?>
-                        <?php foreach($cuotas as $cuota) {  ?>
-                          <tr class="<?php if($cuota->status == 1) { echo 'warning'; } else if($cuota->status == 2) { echo 'success'; } else if($cuota->status == 3) { echo 'danger'; }?>">
-                            <td class="text-center"><a href="javascript:verDetalle({{{ $cuota->id }}})">{{{ $i }}}</a></td>
-                            <td class="text-center">$ {{{ number_format($cuota->saldo_actual,2,".",",") }}}</td>
-                            <td class="text-center">$ {{{ number_format($cuota->amortizacion,2,".",",") }}}</td>
-                            <td class="text-center">$ {{{ number_format($cuota->pago_aplicado,2,".",",") }}}</td>
-                            <td class="text-center">$ {{{ number_format($cuota->saldo_final,2,".",",") }}}</td>
-                            <td class="text-center"> {{{ $cuota->fecha_pago }}}</td>
-                          </tr>
-                          <?php $i++; ?>
-                        <?php } ?>
+                       <div class="white-box">
 
-                      </tbody>
-                    </table>
+                           <!-- Nav tabs -->
+                           <ul class="nav customtab nav-tabs" role="tablist">
+                               <li role="presentation" class="nav-item"><a href="#home1" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Tabla de amortización</span></a>
+                               </li>
+                               <li role="presentation" class="nav-item"><a href="#profile1" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Transacciones</span></a>
+                               </li>
+                               <li role="presentation" class="nav-item"><a href="#messages1" class="nav-link" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Solicitud de crédito</span></a>
+                               </li>
+                               <li role="presentation" class="nav-item"><a href="#settings1" class="nav-link" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-settings"></i></span> <span class="hidden-xs">Expediente</span></a>
+                               </li>
+                           </ul>
+                           <!-- Tab panes -->
+                           <div class="tab-content">
+                               <div role="tabpanel" class="tab-pane fade active in" id="home1">
+                                 <div class="col-md-12">
+                                 <table class="table">
+                                   <thead>
+                                     <tr>
+                                       <th class="text-center">#</th>
+                                       <th class="text-center">Saldo inicial</th>
+                                       <th class="text-center">Monto a pagar</th>
+                                       <th class="text-center">Pago aplicado</th>
+                                       <th class="text-center">Saldo final</th>
+                                       <th class="text-center">F. Pago</th>
+                                     </tr>
+                                   </thead>
+                                   <tbody>
+                                     <?php $i = 1; ?>
+                                     <?php foreach($cuotas as $cuota) {  ?>
+                                       <tr class="<?php if($cuota->status == 1) { echo 'warning'; } else if($cuota->status == 2) { echo 'success'; } else if($cuota->status == 3) { echo 'danger'; }?>">
+                                         <td class="text-center"><a href="javascript:verDetalle({{{ $cuota->id }}})">{{{ $i }}}</a></td>
+                                         <td class="text-center">$ {{{ number_format($cuota->saldo_actual,2,".",",") }}}</td>
+                                         <td class="text-center">$ {{{ number_format($cuota->amortizacion,2,".",",") }}}</td>
+                                         <td class="text-center">$ {{{ number_format($cuota->pago_aplicado,2,".",",") }}}</td>
+                                         <td class="text-center">$ {{{ number_format($cuota->saldo_final,2,".",",") }}}</td>
+                                         <td class="text-center"> {{{ $cuota->fecha_pago }}}</td>
+                                       </tr>
+                                       <?php $i++; ?>
+                                     <?php } ?>
 
-                  </div>
-                  <!-- /.tabs1 -->
-                  <!-- .tabs 2 -->
-                  <div class="tab-pane" id="biography">
+                                   </tbody>
+                                 </table>
+                               </div>
+                               <div class="clearfix"></div>
 
-                    <div class="panel panel-default">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Fecha</th>
-                            <th>Movimiento</th>
-                            <th class="text-center">Saldo inicial</th>
-                            <th class="text-center">Cargo</th>
-                            <th class="text-center">Abono</th>
-                            <th class="text-center">Saldo final</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php foreach($transacciones as $transaccion) { ?>
-                            <tr>
-                              <td>{{{ date('d/m/Y',strtotime($transaccion->fecha_transaccion)) }}}</td>
-                              <td>{{{ $transaccion->transaccion }}}</td>
-                              <td class="text-center">$ {{{ number_format($transaccion->saldo_anterior,2,".",",") }}}</td>
-                              <td class="text-center text-danger">$ {{{ number_format($transaccion->cargo,2,".",",") }}}</td>
-                              <td class="text-center text-success">$ {{{ number_format($transaccion->abono,2,".",",") }}}</td>
-                              <td class="text-center">$ {{{ number_format($transaccion->saldo_final,2,".",",") }}}</td>
-                            </tr>
-                          <?php } ?>
+                               </div>
+                               <div role="tabpanel" class="tab-pane fade" id="profile1">
+                                   <div class="col-md-12">
+                                     <table class="table">
+                                       <thead>
+                                         <tr>
+                                           <th>Fecha</th>
+                                           <th>Movimiento</th>
+                                           <th class="text-center">Saldo inicial</th>
+                                           <th class="text-center">Cargo</th>
+                                           <th class="text-center">Abono</th>
+                                           <th class="text-center">Saldo final</th>
+                                         </tr>
+                                       </thead>
+                                       <tbody>
+                                         <?php foreach($transacciones as $transaccion) { ?>
+                                           <tr>
+                                             <td>{{{ date('d/m/Y',strtotime($transaccion->fecha_transaccion)) }}}</td>
+                                             <td>{{{ $transaccion->transaccion }}}</td>
+                                             <td class="text-center">$ {{{ number_format($transaccion->saldo_anterior,2,".",",") }}}</td>
+                                             <td class="text-center text-danger">$ {{{ number_format($transaccion->cargo,2,".",",") }}}</td>
+                                             <td class="text-center text-success">$ {{{ number_format($transaccion->abono,2,".",",") }}}</td>
+                                             <td class="text-center">$ {{{ number_format($transaccion->saldo_final,2,".",",") }}}</td>
+                                           </tr>
+                                         <?php } ?>
 
-                        </tbody>
-                      </table>
-                    </div>
+                                       </tbody>
+                                     </table>
+                                   </div>
 
-                  </div>
-                  <!-- /.tabs2 -->
+                                   <div class="clearfix"></div>
+                               </div>
+                               <div role="tabpanel" class="tab-pane fade" id="messages1">
+                                   <div class="col-md-12">
+                                     <table class="table">
+                                       <tr>
+                                         <td>Folio de solicitud</td>
+                                         <td>{{{ $solicitud->id }}}</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Monto solicitado</td>
+                                         <td>$ {{{ number_format($solicitud->monto_solicitado,2,".",",") }}}</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Pago solicitado</td>
+                                         <td>$ {{{ number_format($solicitud->pago_solicitado,2,".",",") }}}</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Interés inicial</td>
+                                         <td>$ {{{ round($solicitud->interes_registro,2) }}} %</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Monto aprobado</td>
+                                         <td>$ {{{ number_format($solicitud->monto_aprobado,2,".",",") }}}</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Pago aprobado</td>
+                                         <td>$ {{{ number_format($solicitud->pago_aprobado,2,".",",") }}}</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Interés aprobado</td>
+                                         <td>$ {{{ round($solicitud->interes_registro,2) }}}</td>
+                                       </tr>
+                                     </table>
+                                   </div>
+                                   <div class="col-md-5 pull-right">
+                                       <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
+                                   </div>
+                                   <div class="clearfix"></div>
+                               </div>
+                               <div role="tabpanel" class="tab-pane fade" id="settings1">
+                                 <div class="row">
+                                   <h4>Expediente de la solicitud</h4>
+                                 </div>
+                                 <hr>
+                                 <div class="row">
+                                   <table class="table">
+                                       <thead>
+                                           <tr>
+                                               <th>Documento</th>
+                                               <th width="20%">Acciones</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           <?php foreach ($documentos as $key => $documento) { ?>
+                                           <?php
+                                           $expediente = $documento->getExpediente($data->solicitud_id);
+                                           ?>
+                                           <tr>
+                                               <td><?= $documento->nombre ?></td>
+                                               <td>
+                                                 <?php if (empty($expediente)) { ?>
+                                                 <form name="frm_<?= $documento->id ?>" id="frm_<?= $documento->id ?>" method="post" enctype="multipart/form-data">
+                                                     {{ csrf_field() }}
+                                                     <input type="hidden" name="solicitud_id" value="<?= $data->solicitud_id; ?>">
+                                                     <input type="hidden" name="documento_id" value="<?= $documento->id ?>">
+                                                     <span class="btn btn-primary btn-rounded fileinput-button">
+                                                           <span class="btn-label"><i class="fa fa-upload"></i></span>
+                                                         <span>Carga</span>
+                                                         <input data-documento="<?= $documento->id ?>" name="documento" type="file" class="file"  data-url="{{{ url('admin/expediente_digital/upload_file') }}}">
+                                                     </span>
+                                                 </form>
+                                                 <?php }else{ ?>
+                                                 <button class="btn btn-success btn-circle btn-modal-view-file" data-toggle="modal" data-mime="<?= $expediente->mime; ?>" data-expediente="<?= $expediente->id ?>" data-archivo="<?= $expediente->archivo ?>" data-target="#modalVistaDocumento">
+                                                     <i class="fa <?= $expediente->mime == 'application/pdf' ? 'fa-image' : 'fa-image'; ?> fa-lg" aria-hidden="true"></i>
+                                                 </button>
+                                                 <button class="btn btn-info btn-circle btn-modal-log-file"  data-toggle="modal" data-expediente="<?= $expediente->id ?>" data-documento="<?= $documento->id ?>" data-target="#modalHistoricoDocumento">
+                                                     <i class="fa fa-file-text fa-lg" aria-hidden="true"></i>
+                                                 </button>
+                                                 <button class="btn btn-danger btn-circle btn-delete" data-expediente="<?= $expediente->id ?>" data-url="<?php echo url("/"); ?>/admin/expediente_digital/delete_file/<?php echo $expediente->id?>">
+                                                     <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                                                 </button>
+                                                 <?php } ?>
+                                               </td>
+                                           </tr>
+                                           <?php } ?>
+                                       </tbody>
+                                   </table>
+                                 </div>
+                                   <div class="clearfix"></div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
 
-                  <div class="tab-pane" id="solicitud">
-
-                    <h3>Información general</h3>
-
-                    <table class="table">
-                      <tr>
-                        <td>Folio de solicitud</td>
-                        <td>{{{ $solicitud->id }}}</td>
-                      </tr>
-                      <tr>
-                        <td>Monto solicitado</td>
-                        <td>$ {{{ number_format($solicitud->monto_solicitado,2,".",",") }}}</td>
-                      </tr>
-                      <tr>
-                        <td>Pago solicitado</td>
-                        <td>$ {{{ number_format($solicitud->pago_solicitado,2,".",",") }}}</td>
-                      </tr>
-                      <tr>
-                        <td>Interés inicial</td>
-                        <td>$ {{{ round($solicitud->interes_registro,2) }}} %</td>
-                      </tr>
-                      <tr>
-                        <td>Monto aprobado</td>
-                        <td>$ {{{ number_format($solicitud->monto_aprobado,2,".",",") }}}</td>
-                      </tr>
-                      <tr>
-                        <td>Pago aprobado</td>
-                        <td>$ {{{ number_format($solicitud->pago_aprobado,2,".",",") }}}</td>
-                      </tr>
-                      <tr>
-                        <td>Interés aprobado</td>
-                        <td>$ {{{ round($solicitud->interes_registro,2) }}}</td>
-                      </tr>
-                    </table>
-
-                    <h3>Informacion del Fiador</h3>
-                    <table class="table">
-                      <tr>
-                        <td>Nombre</td>
-                        <td><strong>{{{ $cliente->fiador_nombre }}} {{{ $cliente->fiador_paterno }}} {{{ $cliente->fiador_materno }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Dirección</td>
-                        <td><strong>{{{ $cliente->fiador_calle }}} {{{ $cliente->fiador_colonia }}} {{{ $cliente->fiador_ciudad }}}, {{{ $cliente->fiador_estado }}} {{{ $cliente->fiador_cp }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Telefonos</td>
-                        <td><strong>{{{ $cliente->fiador_celular }}}</strong></td>
-                      </tr>
-                    </table>
-
-                    <h3>Informacion Referencias</h3>
-                    <table class="table">
-                      <tr>
-                        <td colspan="2"><strong>Primera Referencia</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Nombre</td>
-                        <td><strong>{{{ $cliente->referencia1_nombre }}} <small> {{{ $cliente->referencia1_parentesco }}} </small> </strong></td>
-                      </tr>
-                      <tr>
-                        <td>Celular</td>
-                        <td><strong>{{{ $cliente->referencia1_celular }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Dirección</td>
-                        <td><strong>{{{ $cliente->referencia1_direccion }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2"><strong>Segunda Referencia</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Nombre</td>
-                        <td><strong>{{{ $cliente->referencia2_nombre }}} <small> {{{ $cliente->referencia2_parentesco }}} </small> </strong></td>
-                      </tr>
-                      <tr>
-                        <td>Celular</td>
-                        <td><strong>{{{ $cliente->referencia2_celular }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Dirección</td>
-                        <td><strong>{{{ $cliente->referencia2_direccion }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2"><strong>Tercera Referencia</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Nombre</td>
-                        <td><strong>{{{ $cliente->referencia3_nombre }}} <small> {{{ $cliente->referencia3_parentesco }}} </small> </strong></td>
-                      </tr>
-                      <tr>
-                        <td>Celular</td>
-                        <td><strong>{{{ $cliente->referencia3_celular }}}</strong></td>
-                      </tr>
-                      <tr>
-                        <td>Dirección</td>
-                        <td><strong>{{{ $cliente->referencia3_direccion }}}</strong></td>
-                      </tr>
-
-                    </table>
-
-                  </div>
-                  <!-- .tabs 2 -->
-                  <div class="tab-pane" id="documents">
-                      <div class="row">
-                        <h4>Expediente de la solicitud</h4>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Documento</th>
-                                    <th width="20%">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($documentos as $key => $documento) { ?>
-                                <?php
-                                $expediente = $documento->getExpediente($data->solicitud_id);
-                                ?>
-                                <tr>
-                                    <td><?= $documento->nombre ?></td>
-                                    <td>
-                                      <?php if (empty($expediente)) { ?>
-                                      <form name="frm_<?= $documento->id ?>" id="frm_<?= $documento->id ?>" method="post" enctype="multipart/form-data">
-                                          {{ csrf_field() }}
-                                          <input type="hidden" name="solicitud_id" value="<?= $data->solicitud_id; ?>">
-                                          <input type="hidden" name="documento_id" value="<?= $documento->id ?>">
-                                          <span class="btn btn-primary btn-rounded fileinput-button">
-                                                <span class="btn-label"><i class="fa fa-upload"></i></span>
-                                              <span>Carga</span>
-                                              <input data-documento="<?= $documento->id ?>" name="documento" type="file" class="file"  data-url="{{{ url('admin/expediente_digital/upload_file') }}}">
-                                          </span>
-                                      </form>
-                                      <?php }else{ ?>
-                                      <button class="btn btn-success btn-circle btn-modal-view-file" data-toggle="modal" data-mime="<?= $expediente->mime; ?>" data-expediente="<?= $expediente->id ?>" data-archivo="<?= $expediente->archivo ?>" data-target="#modalVistaDocumento">
-                                          <i class="fa <?= $expediente->mime == 'application/pdf' ? 'fa-image' : 'fa-image'; ?> fa-lg" aria-hidden="true"></i>
-                                      </button>
-                                      <button class="btn btn-info btn-circle btn-modal-log-file"  data-toggle="modal" data-expediente="<?= $expediente->id ?>" data-documento="<?= $documento->id ?>" data-target="#modalHistoricoDocumento">
-                                          <i class="fa fa-file-text fa-lg" aria-hidden="true"></i>
-                                      </button>
-                                      <button class="btn btn-danger btn-circle btn-delete" data-expediente="<?= $expediente->id ?>" data-url="<?php echo url("/"); ?>/admin/expediente_digital/delete_file/<?php echo $expediente->id?>">
-                                          <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                                      </button>
-                                      <?php } ?>
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                      </div>
-
-                  </div>
-                  <!-- /.tabs2 -->
-                </div>
-              </div>
 
               <hr/>
 
@@ -497,7 +431,9 @@
     </div>
 </div>
 
+@endsection
 
+@section('scripts')
 <link href="{{ asset('themes/plugins/jqueryfileupload/css/jquery.fileupload.css') }}" rel="stylesheet">
 
 <script src="{{ asset('themes/plugins/jqueryfileupload/js/vendor/jquery.ui.widget.js') }}"></script>
@@ -606,5 +542,4 @@ function renovar() {
   });
 }
 </script>
-
 @endsection

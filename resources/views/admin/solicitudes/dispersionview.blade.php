@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
+
+@section('css')
 <style type="text/css">
     .error{
         color: #a94442;
@@ -9,9 +11,8 @@
         border-color: #a94442;
     }
 </style>
+@endsection
 
-
-<div id="page-wrapper">
     <div class="container-fluid">
 
         <div class="row bg-title">
@@ -242,7 +243,7 @@
          if(json['error'] == 0) {
 
            //swal({ title: "CREDITO APROBADO!!", text: json['msg'], type: "success"});
-            location.reload(); 
+            location.reload();
 
          } else {
 

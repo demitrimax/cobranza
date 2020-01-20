@@ -63,7 +63,6 @@ Route::get("/admin/roles/alta/{id}", "admin\RolesController@view")->middleware('
   //  EO : Roles
 
 
-
 // BO : Prospectos
 Route::post("/admin/prospectos/deleteAll", "admin\ProspectosController@deleteAll")->middleware('auth');
 Route::get("/admin/prospectos", "admin\ProspectosController@index")->middleware('auth');
