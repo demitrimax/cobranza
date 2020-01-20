@@ -57,8 +57,6 @@ if (Auth::check()) {
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- morris CSS -->
-<link href="{{ asset('themes/plugins/bower_components/morrisjs/morris.css') }} " rel="stylesheet">
 
 <!-- Calendar CSS -->
 <link href="{{ asset('themes/plugins/bower_components/calendar/dist/fullcalendar.css') }}" rel="stylesheet" />
@@ -230,7 +228,6 @@ if (Auth::check()) {
     <script src="{{ asset('themes/plugins/bower_components/jquery-asColorPicker-master/libs/jquery-asColor.js') }}"></script>
     <script src="{{ asset('themes/plugins/bower_components/jquery-asColorPicker-master/libs/jquery-asGradient.js') }}"></script>
     <script src="{{ asset('themes/plugins/bower_components/jquery-asColorPicker-master/dist/jquery-asColorPicker.min.js') }}"></script>
-    <script src="{{ asset('themes/plugins/bower_components/morrisjs/morris.js') }}"></script>
 
     <!-- Raphael -->
     <script src="{{ asset('themes/plugins/bower_components/raphael/raphael-min.js') }}"></script>

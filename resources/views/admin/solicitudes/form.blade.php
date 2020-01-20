@@ -27,684 +27,723 @@
   <div class="alert alert-danger" id="msg"> </div>
 </div>
 
+<!-- .row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Nueva Solicitud</h3>
+                            <p class="text-muted m-b-30 font-13"> Complete la siguiente información para la solicitud de un nuevo crédito.</p>
+                            <div id="exampleBasic2" class="wizard">
+                                <ul class="wizard-steps" role="tablist">
+                                    <li class="active" role="tab">
+                                        <h4><span><i class="ti-user"></i></span>Datos del Crédito</h4>
+                                    </li>
+                                    <li role="tab">
+                                        <h4><span><i class="ti-credit-card"></i></span>Datos del Cliente</h4>
+                                    </li>
+                                    <li role="tab">
+                                        <h4><span><i class="ti-check"></i></span>Referencias del Cliente</h4>
+                                    </li>
+                                    <li role="tab">
+                                        <h4><span><i class="ti-check"></i></span>Expediente de Solicitud</h4>
+                                    </li>
+                                </ul>
+                                <div class="wizard-content">
+                                    <div class="wizard-pane active" role="tabpanel">
+                                      <div class="panel panel-default">
+                                    		<div class="panel-heading">
+                                    			Pertenencia de Registro
+                                    		</div>
+                                    		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                    			<div class="panel-body">
+
+                                    				<div class="clear">
+                                    					<p></p>
+                                    				</div>
+
+
+                                            <!-- Monto_solicitado Start -->
+                                            <div class="col-md-10"></div>
+                                    				<div class="col-md-2">
+                                    				 <div class="form-group">
+                                    					 <label for="vendedor_id" class="control-label"> Estatus </label>
+                                    					 <select class="form-control" id="status" name="status">
+                                    						 <option value="1" <?php if($data->status == 1) { echo 'selected'; } ?>> HABILITADA </option>
+                                                 <option value="2" <?php if($data->status == 2) { echo 'selected'; } ?>> DESHABILITADA </option>
+                                    					 </select>
+                                    				 </div>
+                                    				</div>
+                                    				<!-- Monto_solicitado End -->
+
+                                    				<!-- Monto_solicitado Start -->
+                                    				<div class="col-md-12" <?php if(Auth::user()->vendedor_id != 0) { echo 'style="display:none"'; }?>>
+                                    				 <div class="form-group">
+                                    					 <label for="vendedor_id" class="control-label"> Supervisor </label>
+                                    					 <select class="form-control" id="asesor_id" name="asesor_id">
+                                    						 <option value="">---Seleccione---</option>
+                                    						 <?php foreach($asesores as $value) { ?>
+                                    							 <option value="<?php echo $value->id; ?>" <?php if($value->id == $data->asesor_id) { echo 'selected'; }?>>
+                                    								 <?php echo $value->nombre; ?>
+                                    							 </option>
+                                    						 <?php } ?>
+                                    					 </select>
+                                    				 </div>
+                                    				</div>
+                                    				<!-- Monto_solicitado End -->
+
+
+                                            <!-- Monto_solicitado Start -->
+                                    				<div class="col-md-12">
+                                    				 <div class="form-group">
+                                    					 <label for="vendedor_id" class="control-label"> Agente </label>
+                                    					 <select class="form-control" id="agente_id" name="agente_id">
+                                    						 <option value="">---Seleccione---</option>
+                                    					 </select>
+                                    				 </div>
+                                    				</div>
+                                    				<!-- Monto_solicitado End -->
+
+                                    				<div class="clear">
+                                    					<p><br/></p>
+                                    				</div>
+
+                                    			</div>
+
+                                    		</div>
+                                    	</div>
+
+                                      <div class="row">
+                                        <div class="col-sm-6">
+
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Credito a Solicitar
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+
+                                      				<!-- Producto_id Start -->
+                                      				<div class="col-md-12">
+                                      				  <div class="form-group">
+                                      				      <label for="producto_id" class="control-label"> Producto a Adquirir </label>
+                                      				      <select id="producto_id" name="producto_id" class="form-control selectpicker" required>
+                                      				      	<option value="">--- Seleccione ---</option>
+                                      								<?php foreach ($productos as $value) { ?>
+                                      					        <option value="<?php echo $value->id; ?>" <?php if($data->producto_id == $value->id) { echo 'selected'; } ?>><?php echo $value->descripcion; ?></option>
+                                      				        <?php } ?>
+                                      				      </select>
+                                      				      <div class="label label-danger">{{ $errors->first("producto_id") }}</div>
+                                      				   </div>
+                                      				</div>
+                                      				<!-- Producto_id End -->
+
+                                      				<!-- Monto_solicitado Start -->
+                                      				<div class="col-md-12">
+                                      				 <div class="form-group">
+                                      				  <label for="monto_solicitado" class="control-label"> Monto a Solicitar </label>
+                                      					<input type="text" class="form-control" id="monto_solicitado" name="monto_solicitado" value="{{{ isset($data->monto_solicitado ) ? round($data->monto_solicitado,2)  : old('monto_solicitado') }}}" required>
+                                      				 </div>
+                                      				</div>
+                                      				<!-- Monto_solicitado End -->
+
+                                      				<!-- Plazo_solicitado Start -->
+                                      				<div class="col-md-12">
+                                      				 <div class="form-group">
+                                      				  <label for="plazo_solicitado" class="control-label"> Cuanto desea Pagar </label>
+                                      					<input type="text" class="form-control" id="pago_solicitado" min="0" max="99999" name="pago_solicitado" value="{{{ isset($data->pago_solicitado ) ? round($data->pago_solicitado,2)  : old('pago_solicitado') }}}" required>
+                                      				 </div>
+                                      				</div>
+                                      				<!-- Plazo_solicitado End -->
+
+
+
+                                      			</div>
+
+                                      		</div>
+                                      	</div>
+
+                                      </div>
+
+                                        <div class="col-sm-6">
+
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Detalles del Credito Adquirido
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+                                      				<div class="clear">
+                                      					<p></p>
+                                      				</div>
+
+                                      				<!-- Producto_id Start -->
+                                      				<div class="col-md-12">
+                                      				  <div class="form-group">
+                                      				    <h2 class="col-md-6"> Monto Solicitado </h2>
+                                      						<h2 class="col-md-6" id="montoSolicitado" class="text-right text-info">
+                                      							 $ {{{ isset($data->monto_solicitado) ? number_format($data->monto_solicitado,2,".",",") : "000.00"}}}
+                                      						 </h2>
+                                      				   </div>
+                                      				</div>
+                                      				<!-- Producto_id End -->
+
+                                      				<!-- Monto_solicitado Start -->
+                                      				<div class="col-md-12">
+                                      				 <div class="form-group">
+                                      					 <h2 class="col-md-6"> Intereses </h2>
+                                       					<h2 class="col-md-6" id="interesesSolicitado" class="text-right text-warning">
+                                      						$	<?php
+
+                                      								$monto = 0;
+                                      								if($data->interes_registro) {
+                                      									$monto = ($data->monto_solicitado * ($data->interes_registro / 100) );
+                                      									echo number_format($monto,2,".",",");
+                                      								} else {
+                                      									echo $monto;
+                                      								}
+
+                                      							?>
+                                      					</h2>
+                                      					<input type="hidden" class="form-control" id="interes_registro" name="interes_registro" required
+                                      					value="{{{ isset($data->interes_registro ) ? round($data->interes_registro,2)  : old('interes_registro') }}}">
+                                      				 </div>
+                                      				</div>
+                                      				<!-- Monto_solicitado End -->
+
+                                      				<!-- Plazo_solicitado Start -->
+                                      				<div class="col-md-12">
+                                      				 <div class="form-group">
+                                      					 <h2 class="col-md-6"> Total a Pagar </h2>
+                                       					<h2 class="col-md-6" id="totalPagar" class="text-center text-success"> $ <?php echo number_format($monto + $data->monto_solicitado,2,".",","); ?> </h2>
+                                      				 </div>
+                                      				</div>
+                                      				<!-- Plazo_solicitado End -->
+
+                                      				<!-- Plazo_solicitado Start -->
+                                      				<div class="col-md-12">
+                                      				 <div class="form-group">
+                                      					 <h2 class="col-md-6"> Plazo del Credito </h2>
+                                       					<h2 class="col-md-6" id="pagoRealizar" class="text-center text-success"> <?php echo round($data->plazo_solicitado,2); ?> Semanas</h2>
+                                      					<input type="hidden" id="plazo_solicitado" name="plazo_solicitado" value="{{{ isset($data->plazo_solicitado ) ? $data->plazo_solicitado  : old('plazo_solicitado') }}}">
+                                      				 </div>
+                                      				</div>
+                                      				<!-- Plazo_solicitado End -->
+
+                                      				<div class="clear">
+                                      					<p><br/></p>
+                                      				</div>
+
+                                      			</div>
+
+                                      		</div>
+                                      	</div>
+
+                                      </div>
+                                      </div>
+
+                                    </div>
+                                    <div class="wizard-pane" role="tabpanel">
+                                      <div class="col-sm-12">
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Datos Generales del Cliente
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+                                      				<div class="row">
+
+                                                <!-- CURP Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group curpfield">
+                                      					     <label for="curp" class="control-label"> CURP </label> <span class="text-danger">*</span>
+                                      					      <input type="text" class="form-control" id="curp" name="curp"
+                                      					      value="{{{ isset($cliente->curp ) ? $cliente->nombre  : old('curp') }}}" maxlength="18" onchange="validarInput(this)">
+                                                      <div class="form-control-feedback" id="resultado"></div>
+                                                <div class="label label-danger">{{ $errors->first("curp") }}</div>
+                                                          <input type="hidden" class="form-control" id="curpdat" name="curpdat" value="">
+                                      					</div>
+                                      					</div>
+                                      					<!-- Nombre End -->
+
+                                      					<!-- Nombre Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group">
+                                      					<label for="nombre" class="control-label"> Nombre </label>
+                                      					<input type="text" class="form-control" id="nombre" name="nombre"
+                                      					value="{{{ isset($cliente->nombre ) ? $cliente->nombre  : old('nombre') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("nombre") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Nombre End -->
+
+                                      					<!-- Paterno Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group">
+                                      					<label for="paterno" class="control-label"> Apellido paterno </label>
+                                      					<input type="text" class="form-control" id="paterno" name="paterno"
+                                      					value="{{{ isset($cliente->paterno ) ? $cliente->paterno  : old('paterno') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("paterno") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Paterno End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group">
+                                      					<label for="materno" class="control-label">Apellido materno </label>
+                                      					<input type="text" class="form-control" id="materno" name="materno"
+                                      					value="{{{ isset($cliente->materno ) ? $cliente->materno  : old('materno') }}}" maxlength="150"
+                                                onchange="validarNombrecompleto()">
+                                      					<div class="label label-danger">{{ $errors->first("materno") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      					<!-- Nacimiento Start -->
+                                      					<div class="col-md-3" style="display:none" id="col_nacimiento">
+                                      					<div class="form-group">
+                                      					<label for="nacimiento" class="control-label">F. Nacimiento </label>
+                                      					<input type="text" class="form-control dates" id="nacimiento" name="nacimiento" style="background:#FFF;" readonly
+                                      					value="<?php echo date('d-m-Y',strtotime(date('Y-m-d')  . ' - 18 years' ))?>" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("nacimiento") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Nacimiento End -->
+
+                                      					<!-- Telefono Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group">
+                                      					<label for="telefono" class="control-label">Teléfono </label>
+                                      					<input type="text" class="form-control" id="telefono" name="telefono"
+                                      					value="{{{ isset($cliente->telefono ) ? $cliente->telefono  : old('telefono') }}}" maxlength="10" onchange="buscarTelefonoDuplicado(this)">
+                                      					<div class="label label-danger">{{ $errors->first("telefono") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Telefono End -->
+
+                                      					<!-- Celular Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group">
+                                      					<label for="celular" class="control-label">Celular </label>
+                                      					<input type="text" class="form-control" id="celular" name="celular"
+                                      					value="{{{ isset($cliente->celular ) ? $cliente->celular  : old('celular') }}}"  maxlength="10" onchange="buscarTelefonoDuplicado(this)">
+                                      					<div class="label label-danger">{{ $errors->first("celular") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Celular End -->
+
+
+                                      					<!-- Celular Start -->
+                                      					<div class="col-md-3">
+                                      					<div class="form-group">
+                                      					<label for="celular" class="control-label">Tel. Trabajo </label>
+                                      					<input type="text" class="form-control" id="trabajo" name="trabajo"
+                                      					value="{{{ isset($cliente->trabajo ) ? $cliente->trabajo  : old('trabajo') }}}"  maxlength="10" onchange="buscarTelefonoDuplicado(this)">
+                                      					<div class="label label-danger">{{ $errors->first("trabajo") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Celular End -->
+
+                                                <!-- Folio INE Start -->
+                                      					<div class="col-md-3">
+                                        					<div class="form-group">
+                                          					<label for="celular" class="control-label">Folio I.N.E. </label>
+                                          					<input type="text" class="form-control" id="folio_ine" name="folio_ine"
+                                          					value="{{{ isset($data->folio_ine ) ? $data->folio_ine  : old('folio_ine') }}}"  maxlength="10">
+                                          					<div class="label label-danger">{{ $errors->first("folio_ine") }}</div>
+                                        					</div>
+                                      					</div>
+                                      					<!-- Folio INE End -->
+
+                                      					<!-- Correo Start -->
+                                      					<div class="col-md-4">
+                                      					<div class="form-group">
+                                      					<label for="correo" class="control-label">Correo </label>
+                                      					<input type="email" class="form-control" id="correo" name="correo"
+                                      					value="{{{ isset($cliente->correo ) ? $cliente->correo  : old('correo') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("correo") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Correo End -->
+
+                                      					<!-- Correo Start -->
+                                      					<div class="col-md-4">
+                                      					<div class="form-group">
+                                      					<label for="correo" class="control-label">Donde Trabaja </label>
+                                      					<input type="text" class="form-control" id="trabaja" name="trabaja"
+                                      					value="{{{ isset($cliente->trabaja ) ? $cliente->trabaja  : old('trabaja') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("trabaja") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Correo End -->
+
+                                      					<!-- Correo Start -->
+                                      					<div class="col-md-4">
+                                      					<div class="form-group">
+                                      					<label for="correo" class="control-label">Ocupacion </label>
+                                      					<input type="text" class="form-control" id="ocupacion" name="ocupacion"
+                                      					value="{{{ isset($cliente->ocupacion ) ? $cliente->ocupacion  : old('ocupacion') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("correo") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Correo End -->
+                                      				</div>
+
+                                      				<div class="row">
+                                      					<!-- Calle Start -->
+                                      					<div class="col-sm-12">
+                                      					<div class="form-group">
+                                      					<label for="calle" class="control-label"> Domicilio </label>
+                                      					<input type="text" class="form-control" id="calle" name="calle"
+                                      					value="{{{ isset($cliente->calle ) ? $cliente->calle  : old('calle') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("calle") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Calle End -->
+
+                                      					<input type="hidden" class="form-control" id="latitud" name="latitud" value="{{{ isset($cliente->latitud ) ? $cliente->latitud  : old('latitud') }}}" maxlength="150">
+                                      					<input type="hidden" class="form-control" id="longitud" name="longitud" value="{{{ isset($cliente->longitud ) ? $cliente->longitud  : old('longitud') }}}" maxlength="150">
+                                      				</div>
+
+                                      				<div class="row">
+
+                                      					<div id="cteMap" class="map"></div>
+
+                                      				</div>
+
+                                      			</div>
+                                      		</div>
+                                      	</div>
+                                      </div>
+                                    </div>
+                                    <div class="wizard-pane" role="tabpanel">
+                                      <div class="row">
+                                        <div class="col-sm-6">
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Primera Referencia del Cliente
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+                                      				<div class="row">
+
+                                      					<!-- Nombre Start -->
+                                      					<div class="col-md-12">
+                                      						<div class="form-group">
+                                      						<label for="nombre" class="control-label"> Nombre </label>
+                                      						<input type="text" class="form-control" id="referencia1_nombre" name="referencia1_nombre"
+                                      						value="{{{ isset($cliente->referencia1_nombre ) ? $cliente->referencia1_nombre  : old('referencia1_nombre') }}}" maxlength="150">
+                                      						<div class="label label-danger">{{ $errors->first("referencia1_nombre") }}</div>
+                                      						</div>
+                                      					</div>
+                                      					<!-- Nombre End -->
+
+                                      					<!-- Paterno Start -->
+                                      					<div class="col-md-6">
+                                      						<div class="form-group">
+                                      						<label for="paterno" class="control-label"> Parentesco </label>
+                                      						<input type="text" class="form-control" id="referencia1_parentesco" name="referencia1_parentesco"
+                                      						value="{{{ isset($cliente->referencia1_parentesco ) ? $cliente->referencia1_parentesco  : old('referencia1_parentesco') }}}" maxlength="150">
+                                      						<div class="label label-danger">{{ $errors->first("referencia1_parentesco") }}</div>
+                                      						</div>
+                                      					</div>
+                                      					<!-- Paterno End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-6">
+                                      					<div class="form-group">
+                                      					<label for="materno" class="control-label">Celular </label>
+                                      					<input type="text" class="form-control" id="referencia1_celular" name="referencia1_celular"
+                                      					value="{{{ isset($cliente->referencia1_celular ) ? $cliente->referencia1_celular  : old('referencia1_celular') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("referencia1_celular") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-12">
+                                      					<div class="form-group">
+                                      					<label for="materno" class="control-label">Domicilio </label>
+                                      					<input type="text" class="form-control" id="referencia1_domicilio" name="referencia1_domicilio"
+                                      					value="{{{ isset($cliente->referencia1_domicilio ) ? $cliente->referencia1_domicilio  : old('referencia1_domicilio') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("referencia1_domicilio") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      					<input type="hidden" class="form-control" id="referencia1_latitud" name="referencia1_latitud" value="{{{ isset($cliente->latitud ) ? $cliente->latitud  : old('latitud') }}}" maxlength="150">
+                                      					<input type="hidden" class="form-control" id="referencia1_longitud" name="referencia1_longitud" value="{{{ isset($cliente->longitud ) ? $cliente->longitud  : old('longitud') }}}" maxlength="150">
+
+                                      				</div>
+
+                                      				<div class="row">
+
+                                      					<div id="ref1Map" class="map"></div>
+
+                                      				</div>
+
+                                      			</div>
+                                      		</div>
+                                      	</div>
+                                      </div>
+                                        <div class="col-sm-6">
+                                        <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                            Segunda Referencia del Cliente
+                                          </div>
+                                          <div class="panel-wrapper collapse in" aria-expanded="true">
+                                            <div class="panel-body">
+
+                                              <div class="row">
+
+                                                <!-- Nombre Start -->
+                                                <div class="col-md-12">
+                                                <div class="form-group">
+                                                <label for="nombre" class="control-label"> Nombre </label>
+                                                <input type="text" class="form-control" id="referencia2_nombre" name="referencia2_nombre"
+                                                value="{{{ isset($cliente->referencia2_nombre ) ? $cliente->referencia2_nombre  : old('referencia2_nombre') }}}" maxlength="150">
+                                                <div class="label label-danger">{{ $errors->first("referencia2_nombre") }}</div>
+                                                </div>
+                                                </div>
+                                                <!-- Nombre End -->
+
+                                                <!-- Paterno Start -->
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label for="paterno" class="control-label"> Parentesco </label>
+                                                <input type="text" class="form-control" id="referencia2_parentesco" name="referencia2_parentesco"
+                                                value="{{{ isset($cliente->referencia2_parentesco ) ? $cliente->referencia2_parentesco  : old('referencia2_parentesco') }}}" maxlength="150">
+                                                <div class="label label-danger">{{ $errors->first("referencia2_parentesco") }}</div>
+                                                </div>
+                                                </div>
+                                                <!-- Paterno End -->
+
+
+                                                <!-- Materno Start -->
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                <label for="materno" class="control-label">Celular </label>
+                                                <input type="text" class="form-control" id="referencia2_celular" name="referencia2_celular"
+                                                value="{{{ isset($cliente->referencia2_celular ) ? $cliente->referencia2_celular  : old('referencia2_celular') }}}" maxlength="150">
+                                                <div class="label label-danger">{{ $errors->first("referencia2_celular") }}</div>
+                                                </div>
+                                                </div>
+                                                <!-- Materno End -->
+
+                                                <!-- Materno Start -->
+                                                <div class="col-md-12">
+                                                <div class="form-group">
+                                                <label for="materno" class="control-label">Domicilio </label>
+                                                <input type="text" class="form-control" id="referencia2_domicilio" name="referencia2_domicilio"
+                                                value="{{{ isset($cliente->referencia2_domicilio ) ? $cliente->referencia2_domicilio  : old('referencia2_domicilio') }}}" maxlength="150">
+                                                <div class="label label-danger">{{ $errors->first("referencia2_domicilio") }}</div>
+                                                </div>
+                                                </div>
+                                                <!-- Materno End -->
+
+                                                <input type="hidden" class="form-control" id="referencia2_latitud" name="referencia2_latitud" value="{{{ isset($cliente->referencia2_latitud ) ? $cliente->referencia2_latitud  : old('referencia2_latitud') }}}" maxlength="150">
+                                                <input type="hidden" class="form-control" id="referencia2_longitud" name="referencia2_longitud" value="{{{ isset($cliente->referencia2_longitud ) ? $cliente->referencia2_longitud  : old('referencia2_longitud') }}}" maxlength="150">
+
+                                              </div>
+
+                                              <div class="row">
+
+                                                <div id="ref2Map" class="map"></div>
+
+                                              </div>
+
+                                            </div>
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                      </div>
+
+
+                                      <div class="row">
+                                        <div class="col-sm-6">
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Tercera Referencia del Cliente
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+                                      				<div class="row">
+                                      					<!-- Nombre Start -->
+                                      					<div class="col-md-12">
+                                      					<div class="form-group">
+                                      					<label for="nombre" class="control-label"> Nombre </label>
+                                      					<input type="text" class="form-control" id="referencia3_nombre" name="referencia3_nombre"
+                                      					value="{{{ isset($cliente->referencia3_nombre ) ? $cliente->referencia3_nombre  : old('referencia3_nombre') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("referencia2_nombre") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Nombre End -->
+
+                                      					<!-- Paterno Start -->
+                                      					<div class="col-md-6">
+                                      					<div class="form-group">
+                                      					<label for="paterno" class="control-label"> Parentesco </label>
+                                      					<input type="text" class="form-control" id="referencia3_parentesco" name="referencia3_parentesco"
+                                      					value="{{{ isset($cliente->referencia3_parentesco ) ? $cliente->referencia3_parentesco  : old('referencia3_parentesco') }}}" maxlength="150">
+                                      					</div>
+                                      					</div>
+                                      					<!-- Paterno End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-6">
+                                      					<div class="form-group">
+                                      					<label for="materno" class="control-label">Celular </label>
+                                      					<input type="text" class="form-control" id="referencia3_celular" name="referencia3_celular"
+                                      					value="{{{ isset($cliente->referencia3_celular ) ? $cliente->referencia3_celular  : old('referencia3_celular') }}}" maxlength="10">
+                                      					</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-12">
+                                      					<div class="form-group">
+                                      					<label for="materno" class="control-label">Domicilio </label>
+                                      					<input type="text" class="form-control" id="referencia3_domicilio" name="referencia3_domicilio"
+                                      					value="{{{ isset($cliente->referencia3_domicilio ) ? $cliente->referencia3_domicilio  : old('referencia3_domicilio') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("referencia2_domicilio") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      					<input type="hidden" class="form-control" id="referencia3_latitud" name="referencia3_latitud" value="{{{ isset($cliente->referencia3_latitud ) ? $cliente->referencia3_latitud  : old('referencia3_latitud') }}}" maxlength="150">
+                                      					<input type="hidden" class="form-control" id="referencia3_longitud" name="referencia3_longitud" value="{{{ isset($cliente->referencia3_longitud ) ? $cliente->referencia3_longitud  : old('referencia3_longitud') }}}" maxlength="150">
+
+                                      				</div>
+
+                                      				<div class="row">
+
+                                      					<div id="ref3Map" class="map"></div>
+
+                                      				</div>
+
+                                      			</div>
+                                      		</div>
+                                      	</div>
+                                      </div>
+
+                                        <div class="col-sm-6">
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Aval del Cliente
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+                                      				<div class="row">
+
+                                      					<!-- Nombre Start -->
+                                      					<div class="col-md-12">
+                                      					<div class="form-group">
+                                      					<label for="nombre" class="control-label"> Nombre </label>
+                                      					<input type="text" class="form-control" id="fiador_nombre" name="fiador_nombre"
+                                      					value="{{{ isset($cliente->nombre ) ? $cliente->fiador_nombre  : old('fiador_nombre') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("fiador_nombre") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Nombre End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-6">
+                                      						<div class="form-group">
+                                      						<label for="materno" class="control-label">Telefono </label>
+                                      						<input type="text" class="form-control" id="fiador_telefono" name="fiador_telefono"
+                                      						value="{{{ isset($cliente->fiador_telefono ) ? $cliente->fiador_telefono  : old('fiador_telefono') }}}" maxlength="10">
+                                      						<div class="label label-danger">{{ $errors->first("fiador_telefono") }}</div>
+                                      						</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      					<!-- Materno Start -->
+                                      					<div class="col-md-6">
+                                      					<div class="form-group">
+                                      					<label for="materno" class="control-label">Celular </label>
+                                      					<input type="text" class="form-control" id="fiador_celular" name="fiador_celular"
+                                      					value="{{{ isset($cliente->fiador_celular ) ? $cliente->fiador_celular  : old('fiador_celular') }}}" maxlength="10">
+                                      					<div class="label label-danger">{{ $errors->first("fiador_celular") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Materno End -->
+
+                                      				</div>
+
+                                      				<div class="row">
+
+                                      					<!-- Calle Start -->
+                                      					<div class="col-md-12">
+                                      					<div class="form-group">
+                                      					<label for="calle" class="control-label"> Domicilio </label>
+                                      					<input type="text" class="form-control" id="fiador_calle" name="fiador_calle"
+                                      					value="{{{ isset($cliente->fiador_calle ) ? $cliente->fiador_calle  : old('fiador_calle') }}}" maxlength="150">
+                                      					<div class="label label-danger">{{ $errors->first("calle") }}</div>
+                                      					</div>
+                                      					</div>
+                                      					<!-- Calle End -->
+
+                                      					<input type="hidden" class="form-control" id="fiador_latitud" name="fiador_latitud" value="{{{ isset($cliente->fiador_latitud ) ? $cliente->fiador_latitud  : old('fiador_latitud') }}}" maxlength="150">
+                                      					<input type="hidden" class="form-control" id="fiador_longitud" name="fiador_longitud" value="{{{ isset($cliente->fiador_longitud ) ? $cliente->fiador_longitud  : old('fiador_longitud') }}}" maxlength="150">
+
+                                      				</div>
+
+                                      				<div class="row">
+
+                                      					<div id="avalMap" class="map"></div>
+
+                                      				</div>
+
+                                      			</div>
+
+                                      		</div>
+                                      	</div>
+                                      </div>
+
+                                      </div>
+                                    </div>
+                                    <div class="wizard-pane" role="tabpanel">
+                                      <div class="col-sm-12">
+                                      	<div class="panel panel-default">
+                                      		<div class="panel-heading">
+                                      			Expediente de Solicitud
+                                      		</div>
+                                      		<div class="panel-wrapper collapse in" aria-expanded="true">
+                                      			<div class="panel-body">
+
+                                      			   <div class="row" id="documentacion">
+
+                                               </div>
+
+                                      			</div>
+
+                                      		</div>
+                                      	</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
 
 <div class="col-sm-12">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Pertenencia de Registro
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
 
-				<div class="clear">
-					<p></p>
-				</div>
-
-
-        <!-- Monto_solicitado Start -->
-        <div class="col-md-10"></div>
-				<div class="col-md-2">
-				 <div class="form-group">
-					 <label for="vendedor_id" class="control-label"> Estatus </label>
-					 <select class="form-control" id="status" name="status">
-						 <option value="1" <?php if($data->status == 1) { echo 'selected'; } ?>> HABILITADA </option>
-             <option value="2" <?php if($data->status == 2) { echo 'selected'; } ?>> DESHABILITADA </option>
-					 </select>
-				 </div>
-				</div>
-				<!-- Monto_solicitado End -->
-
-				<!-- Monto_solicitado Start -->
-				<div class="col-md-12" <?php if(Auth::user()->vendedor_id != 0) { echo 'style="display:none"'; }?>>
-				 <div class="form-group">
-					 <label for="vendedor_id" class="control-label"> Supervisor </label>
-					 <select class="form-control" id="asesor_id" name="asesor_id">
-						 <option value="">---Seleccione---</option>
-						 <?php foreach($asesores as $value) { ?>
-							 <option value="<?php echo $value->id; ?>" <?php if($value->id == $data->asesor_id) { echo 'selected'; }?>>
-								 <?php echo $value->nombre; ?>
-							 </option>
-						 <?php } ?>
-					 </select>
-				 </div>
-				</div>
-				<!-- Monto_solicitado End -->
-
-
-        <!-- Monto_solicitado Start -->
-				<div class="col-md-12">
-				 <div class="form-group">
-					 <label for="vendedor_id" class="control-label"> Agente </label>
-					 <select class="form-control" id="agente_id" name="agente_id">
-						 <option value="">---Seleccione---</option>
-					 </select>
-				 </div>
-				</div>
-				<!-- Monto_solicitado End -->
-
-				<div class="clear">
-					<p><br/></p>
-				</div>
-
-			</div>
-
-		</div>
-	</div>
 
 </div>
 
-<div class="row">
-  <div class="col-sm-6">
 
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Credito a Solicitar
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
 
 
-				<!-- Producto_id Start -->
-				<div class="col-md-12">
-				  <div class="form-group">
-				      <label for="producto_id" class="control-label"> Producto a Adquirir </label>
-				      <select id="producto_id" name="producto_id" class="form-control selectpicker" required>
-				      	<option value="">--- Seleccione ---</option>
-								<?php foreach ($productos as $value) { ?>
-					        <option value="<?php echo $value->id; ?>" <?php if($data->producto_id == $value->id) { echo 'selected'; } ?>><?php echo $value->descripcion; ?></option>
-				        <?php } ?>
-				      </select>
-				      <div class="label label-danger">{{ $errors->first("producto_id") }}</div>
-				   </div>
-				</div>
-				<!-- Producto_id End -->
-
-				<!-- Monto_solicitado Start -->
-				<div class="col-md-12">
-				 <div class="form-group">
-				  <label for="monto_solicitado" class="control-label"> Monto a Solicitar </label>
-					<input type="text" class="form-control" id="monto_solicitado" name="monto_solicitado" value="{{{ isset($data->monto_solicitado ) ? round($data->monto_solicitado,2)  : old('monto_solicitado') }}}" required>
-				 </div>
-				</div>
-				<!-- Monto_solicitado End -->
-
-				<!-- Plazo_solicitado Start -->
-				<div class="col-md-12">
-				 <div class="form-group">
-				  <label for="plazo_solicitado" class="control-label"> Cuanto desea Pagar </label>
-					<input type="text" class="form-control" id="pago_solicitado" min="0" max="99999" name="pago_solicitado" value="{{{ isset($data->pago_solicitado ) ? round($data->pago_solicitado,2)  : old('pago_solicitado') }}}" required>
-				 </div>
-				</div>
-				<!-- Plazo_solicitado End -->
-
-
-
-			</div>
-
-		</div>
-	</div>
-
-</div>
-
-  <div class="col-sm-6">
-
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Detalles del Credito Adquirido
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
-
-				<div class="clear">
-					<p></p>
-				</div>
-
-				<!-- Producto_id Start -->
-				<div class="col-md-12">
-				  <div class="form-group">
-				    <h2 class="col-md-6"> Monto Solicitado </h2>
-						<h2 class="col-md-6" id="montoSolicitado" class="text-right text-info">
-							 $ {{{ isset($data->monto_solicitado) ? number_format($data->monto_solicitado,2,".",",") : "000.00"}}}
-						 </h2>
-				   </div>
-				</div>
-				<!-- Producto_id End -->
-
-				<!-- Monto_solicitado Start -->
-				<div class="col-md-12">
-				 <div class="form-group">
-					 <h2 class="col-md-6"> Intereses </h2>
- 					<h2 class="col-md-6" id="interesesSolicitado" class="text-right text-warning">
-						$	<?php
-
-								$monto = 0;
-								if($data->interes_registro) {
-									$monto = ($data->monto_solicitado * ($data->interes_registro / 100) );
-									echo number_format($monto,2,".",",");
-								} else {
-									echo $monto;
-								}
-
-							?>
-					</h2>
-					<input type="hidden" class="form-control" id="interes_registro" name="interes_registro" required
-					value="{{{ isset($data->interes_registro ) ? round($data->interes_registro,2)  : old('interes_registro') }}}">
-				 </div>
-				</div>
-				<!-- Monto_solicitado End -->
-
-				<!-- Plazo_solicitado Start -->
-				<div class="col-md-12">
-				 <div class="form-group">
-					 <h2 class="col-md-6"> Total a Pagar </h2>
- 					<h2 class="col-md-6" id="totalPagar" class="text-center text-success"> $ <?php echo number_format($monto + $data->monto_solicitado,2,".",","); ?> </h2>
-				 </div>
-				</div>
-				<!-- Plazo_solicitado End -->
-
-				<!-- Plazo_solicitado Start -->
-				<div class="col-md-12">
-				 <div class="form-group">
-					 <h2 class="col-md-6"> Plazo del Credito </h2>
- 					<h2 class="col-md-6" id="pagoRealizar" class="text-center text-success"> <?php echo round($data->plazo_solicitado,2); ?> Semanas</h2>
-					<input type="hidden" id="plazo_solicitado" name="plazo_solicitado" value="{{{ isset($data->plazo_solicitado ) ? $data->plazo_solicitado  : old('plazo_solicitado') }}}">
-				 </div>
-				</div>
-				<!-- Plazo_solicitado End -->
-
-				<div class="clear">
-					<p><br/></p>
-				</div>
-
-			</div>
-
-		</div>
-	</div>
-
-</div>
-</div>
-
-<div class="col-sm-12">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Datos Generales del Cliente
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
-
-				<div class="row">
-
-          <!-- CURP Start -->
-					<div class="col-md-3">
-					<div class="form-group curpfield">
-					     <label for="curp" class="control-label"> CURP </label> <span class="text-danger">*</span>
-					      <input type="text" class="form-control" id="curp" name="curp"
-					      value="{{{ isset($cliente->curp ) ? $cliente->nombre  : old('curp') }}}" maxlength="18" onchange="validarInput(this)">
-                <div class="form-control-feedback" id="resultado"></div>
-          <div class="label label-danger">{{ $errors->first("curp") }}</div>
-                    <input type="hidden" class="form-control" id="curpdat" name="curpdat" value="">
-					</div>
-					</div>
-					<!-- Nombre End -->
-
-					<!-- Nombre Start -->
-					<div class="col-md-3">
-					<div class="form-group">
-					<label for="nombre" class="control-label"> Nombre </label>
-					<input type="text" class="form-control" id="nombre" name="nombre"
-					value="{{{ isset($cliente->nombre ) ? $cliente->nombre  : old('nombre') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("nombre") }}</div>
-					</div>
-					</div>
-					<!-- Nombre End -->
-
-					<!-- Paterno Start -->
-					<div class="col-md-3">
-					<div class="form-group">
-					<label for="paterno" class="control-label"> Apellido paterno </label>
-					<input type="text" class="form-control" id="paterno" name="paterno"
-					value="{{{ isset($cliente->paterno ) ? $cliente->paterno  : old('paterno') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("paterno") }}</div>
-					</div>
-					</div>
-					<!-- Paterno End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-3">
-					<div class="form-group">
-					<label for="materno" class="control-label">Apellido materno </label>
-					<input type="text" class="form-control" id="materno" name="materno"
-					value="{{{ isset($cliente->materno ) ? $cliente->materno  : old('materno') }}}" maxlength="150"
-          onchange="validarNombrecompleto()">
-					<div class="label label-danger">{{ $errors->first("materno") }}</div>
-					</div>
-					</div>
-					<!-- Materno End -->
-
-					<!-- Nacimiento Start -->
-					<div class="col-md-3" style="display:none" id="col_nacimiento">
-					<div class="form-group">
-					<label for="nacimiento" class="control-label">F. Nacimiento </label>
-					<input type="text" class="form-control dates" id="nacimiento" name="nacimiento" style="background:#FFF;" readonly
-					value="<?php echo date('d-m-Y',strtotime(date('Y-m-d')  . ' - 18 years' ))?>" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("nacimiento") }}</div>
-					</div>
-					</div>
-					<!-- Nacimiento End -->
-
-					<!-- Telefono Start -->
-					<div class="col-md-3">
-					<div class="form-group">
-					<label for="telefono" class="control-label">Teléfono </label>
-					<input type="text" class="form-control" id="telefono" name="telefono"
-					value="{{{ isset($cliente->telefono ) ? $cliente->telefono  : old('telefono') }}}" maxlength="10" onchange="buscarTelefonoDuplicado(this)">
-					<div class="label label-danger">{{ $errors->first("telefono") }}</div>
-					</div>
-					</div>
-					<!-- Telefono End -->
-
-					<!-- Celular Start -->
-					<div class="col-md-3">
-					<div class="form-group">
-					<label for="celular" class="control-label">Celular </label>
-					<input type="text" class="form-control" id="celular" name="celular"
-					value="{{{ isset($cliente->celular ) ? $cliente->celular  : old('celular') }}}"  maxlength="10" onchange="buscarTelefonoDuplicado(this)">
-					<div class="label label-danger">{{ $errors->first("celular") }}</div>
-					</div>
-					</div>
-					<!-- Celular End -->
-
-
-					<!-- Celular Start -->
-					<div class="col-md-3">
-					<div class="form-group">
-					<label for="celular" class="control-label">Tel. Trabajo </label>
-					<input type="text" class="form-control" id="trabajo" name="trabajo"
-					value="{{{ isset($cliente->trabajo ) ? $cliente->trabajo  : old('trabajo') }}}"  maxlength="10" onchange="buscarTelefonoDuplicado(this)">
-					<div class="label label-danger">{{ $errors->first("trabajo") }}</div>
-					</div>
-					</div>
-					<!-- Celular End -->
-
-          <!-- Folio INE Start -->
-					<div class="col-md-3">
-  					<div class="form-group">
-    					<label for="celular" class="control-label">Folio I.N.E. </label>
-    					<input type="text" class="form-control" id="folio_ine" name="folio_ine"
-    					value="{{{ isset($data->folio_ine ) ? $data->folio_ine  : old('folio_ine') }}}"  maxlength="10">
-    					<div class="label label-danger">{{ $errors->first("folio_ine") }}</div>
-  					</div>
-					</div>
-					<!-- Folio INE End -->
-
-					<!-- Correo Start -->
-					<div class="col-md-4">
-					<div class="form-group">
-					<label for="correo" class="control-label">Correo </label>
-					<input type="email" class="form-control" id="correo" name="correo"
-					value="{{{ isset($cliente->correo ) ? $cliente->correo  : old('correo') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("correo") }}</div>
-					</div>
-					</div>
-					<!-- Correo End -->
-
-					<!-- Correo Start -->
-					<div class="col-md-4">
-					<div class="form-group">
-					<label for="correo" class="control-label">Donde Trabaja </label>
-					<input type="text" class="form-control" id="trabaja" name="trabaja"
-					value="{{{ isset($cliente->trabaja ) ? $cliente->trabaja  : old('trabaja') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("trabaja") }}</div>
-					</div>
-					</div>
-					<!-- Correo End -->
-
-					<!-- Correo Start -->
-					<div class="col-md-4">
-					<div class="form-group">
-					<label for="correo" class="control-label">Ocupacion </label>
-					<input type="text" class="form-control" id="ocupacion" name="ocupacion"
-					value="{{{ isset($cliente->ocupacion ) ? $cliente->ocupacion  : old('ocupacion') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("correo") }}</div>
-					</div>
-					</div>
-					<!-- Correo End -->
-				</div>
-
-				<div class="row">
-					<!-- Calle Start -->
-					<div class="col-sm-12">
-					<div class="form-group">
-					<label for="calle" class="control-label"> Domicilio </label>
-					<input type="text" class="form-control" id="calle" name="calle"
-					value="{{{ isset($cliente->calle ) ? $cliente->calle  : old('calle') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("calle") }}</div>
-					</div>
-					</div>
-					<!-- Calle End -->
-
-					<input type="hidden" class="form-control" id="latitud" name="latitud" value="{{{ isset($cliente->latitud ) ? $cliente->latitud  : old('latitud') }}}" maxlength="150">
-					<input type="hidden" class="form-control" id="longitud" name="longitud" value="{{{ isset($cliente->longitud ) ? $cliente->longitud  : old('longitud') }}}" maxlength="150">
-				</div>
-
-				<div class="row">
-
-					<div id="cteMap" class="map"></div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-sm-6">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Primera Referencia del Cliente
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
-
-				<div class="row">
-
-					<!-- Nombre Start -->
-					<div class="col-md-12">
-						<div class="form-group">
-						<label for="nombre" class="control-label"> Nombre </label>
-						<input type="text" class="form-control" id="referencia1_nombre" name="referencia1_nombre"
-						value="{{{ isset($cliente->referencia1_nombre ) ? $cliente->referencia1_nombre  : old('referencia1_nombre') }}}" maxlength="150">
-						<div class="label label-danger">{{ $errors->first("referencia1_nombre") }}</div>
-						</div>
-					</div>
-					<!-- Nombre End -->
-
-					<!-- Paterno Start -->
-					<div class="col-md-6">
-						<div class="form-group">
-						<label for="paterno" class="control-label"> Parentesco </label>
-						<input type="text" class="form-control" id="referencia1_parentesco" name="referencia1_parentesco"
-						value="{{{ isset($cliente->referencia1_parentesco ) ? $cliente->referencia1_parentesco  : old('referencia1_parentesco') }}}" maxlength="150">
-						<div class="label label-danger">{{ $errors->first("referencia1_parentesco") }}</div>
-						</div>
-					</div>
-					<!-- Paterno End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-6">
-					<div class="form-group">
-					<label for="materno" class="control-label">Celular </label>
-					<input type="text" class="form-control" id="referencia1_celular" name="referencia1_celular"
-					value="{{{ isset($cliente->referencia1_celular ) ? $cliente->referencia1_celular  : old('referencia1_celular') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("referencia1_celular") }}</div>
-					</div>
-					</div>
-					<!-- Materno End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-12">
-					<div class="form-group">
-					<label for="materno" class="control-label">Domicilio </label>
-					<input type="text" class="form-control" id="referencia1_domicilio" name="referencia1_domicilio"
-					value="{{{ isset($cliente->referencia1_domicilio ) ? $cliente->referencia1_domicilio  : old('referencia1_domicilio') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("referencia1_domicilio") }}</div>
-					</div>
-					</div>
-					<!-- Materno End -->
-
-					<input type="hidden" class="form-control" id="referencia1_latitud" name="referencia1_latitud" value="{{{ isset($cliente->latitud ) ? $cliente->latitud  : old('latitud') }}}" maxlength="150">
-					<input type="hidden" class="form-control" id="referencia1_longitud" name="referencia1_longitud" value="{{{ isset($cliente->longitud ) ? $cliente->longitud  : old('longitud') }}}" maxlength="150">
-
-				</div>
-
-				<div class="row">
-
-					<div id="ref1Map" class="map"></div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div>
-  <div class="col-sm-6">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Segunda Referencia del Cliente
-    </div>
-    <div class="panel-wrapper collapse in" aria-expanded="true">
-      <div class="panel-body">
-
-        <div class="row">
-
-          <!-- Nombre Start -->
-          <div class="col-md-12">
-          <div class="form-group">
-          <label for="nombre" class="control-label"> Nombre </label>
-          <input type="text" class="form-control" id="referencia2_nombre" name="referencia2_nombre"
-          value="{{{ isset($cliente->referencia2_nombre ) ? $cliente->referencia2_nombre  : old('referencia2_nombre') }}}" maxlength="150">
-          <div class="label label-danger">{{ $errors->first("referencia2_nombre") }}</div>
-          </div>
-          </div>
-          <!-- Nombre End -->
-
-          <!-- Paterno Start -->
-          <div class="col-md-6">
-          <div class="form-group">
-          <label for="paterno" class="control-label"> Parentesco </label>
-          <input type="text" class="form-control" id="referencia2_parentesco" name="referencia2_parentesco"
-          value="{{{ isset($cliente->referencia2_parentesco ) ? $cliente->referencia2_parentesco  : old('referencia2_parentesco') }}}" maxlength="150">
-          <div class="label label-danger">{{ $errors->first("referencia2_parentesco") }}</div>
-          </div>
-          </div>
-          <!-- Paterno End -->
-
-
-          <!-- Materno Start -->
-          <div class="col-md-6">
-          <div class="form-group">
-          <label for="materno" class="control-label">Celular </label>
-          <input type="text" class="form-control" id="referencia2_celular" name="referencia2_celular"
-          value="{{{ isset($cliente->referencia2_celular ) ? $cliente->referencia2_celular  : old('referencia2_celular') }}}" maxlength="150">
-          <div class="label label-danger">{{ $errors->first("referencia2_celular") }}</div>
-          </div>
-          </div>
-          <!-- Materno End -->
-
-          <!-- Materno Start -->
-          <div class="col-md-12">
-          <div class="form-group">
-          <label for="materno" class="control-label">Domicilio </label>
-          <input type="text" class="form-control" id="referencia2_domicilio" name="referencia2_domicilio"
-          value="{{{ isset($cliente->referencia2_domicilio ) ? $cliente->referencia2_domicilio  : old('referencia2_domicilio') }}}" maxlength="150">
-          <div class="label label-danger">{{ $errors->first("referencia2_domicilio") }}</div>
-          </div>
-          </div>
-          <!-- Materno End -->
-
-          <input type="hidden" class="form-control" id="referencia2_latitud" name="referencia2_latitud" value="{{{ isset($cliente->referencia2_latitud ) ? $cliente->referencia2_latitud  : old('referencia2_latitud') }}}" maxlength="150">
-          <input type="hidden" class="form-control" id="referencia2_longitud" name="referencia2_longitud" value="{{{ isset($cliente->referencia2_longitud ) ? $cliente->referencia2_longitud  : old('referencia2_longitud') }}}" maxlength="150">
-
-        </div>
-
-        <div class="row">
-
-          <div id="ref2Map" class="map"></div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-</div>
-
-
-<div class="row">
-  <div class="col-sm-6">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Tercera Referencia del Cliente
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
-
-				<div class="row">
-					<!-- Nombre Start -->
-					<div class="col-md-12">
-					<div class="form-group">
-					<label for="nombre" class="control-label"> Nombre </label>
-					<input type="text" class="form-control" id="referencia3_nombre" name="referencia3_nombre"
-					value="{{{ isset($cliente->referencia3_nombre ) ? $cliente->referencia3_nombre  : old('referencia3_nombre') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("referencia2_nombre") }}</div>
-					</div>
-					</div>
-					<!-- Nombre End -->
-
-					<!-- Paterno Start -->
-					<div class="col-md-6">
-					<div class="form-group">
-					<label for="paterno" class="control-label"> Parentesco </label>
-					<input type="text" class="form-control" id="referencia3_parentesco" name="referencia3_parentesco"
-					value="{{{ isset($cliente->referencia3_parentesco ) ? $cliente->referencia3_parentesco  : old('referencia3_parentesco') }}}" maxlength="150">
-					</div>
-					</div>
-					<!-- Paterno End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-6">
-					<div class="form-group">
-					<label for="materno" class="control-label">Celular </label>
-					<input type="text" class="form-control" id="referencia3_celular" name="referencia3_celular"
-					value="{{{ isset($cliente->referencia3_celular ) ? $cliente->referencia3_celular  : old('referencia3_celular') }}}" maxlength="10">
-					</div>
-					</div>
-					<!-- Materno End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-12">
-					<div class="form-group">
-					<label for="materno" class="control-label">Domicilio </label>
-					<input type="text" class="form-control" id="referencia3_domicilio" name="referencia3_domicilio"
-					value="{{{ isset($cliente->referencia3_domicilio ) ? $cliente->referencia3_domicilio  : old('referencia3_domicilio') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("referencia2_domicilio") }}</div>
-					</div>
-					</div>
-					<!-- Materno End -->
-
-					<input type="hidden" class="form-control" id="referencia3_latitud" name="referencia3_latitud" value="{{{ isset($cliente->referencia3_latitud ) ? $cliente->referencia3_latitud  : old('referencia3_latitud') }}}" maxlength="150">
-					<input type="hidden" class="form-control" id="referencia3_longitud" name="referencia3_longitud" value="{{{ isset($cliente->referencia3_longitud ) ? $cliente->referencia3_longitud  : old('referencia3_longitud') }}}" maxlength="150">
-
-				</div>
-
-				<div class="row">
-
-					<div id="ref3Map" class="map"></div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div>
-
-  <div class="col-sm-6">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Aval del Cliente
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
-
-				<div class="row">
-
-					<!-- Nombre Start -->
-					<div class="col-md-12">
-					<div class="form-group">
-					<label for="nombre" class="control-label"> Nombre </label>
-					<input type="text" class="form-control" id="fiador_nombre" name="fiador_nombre"
-					value="{{{ isset($cliente->nombre ) ? $cliente->fiador_nombre  : old('fiador_nombre') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("fiador_nombre") }}</div>
-					</div>
-					</div>
-					<!-- Nombre End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-6">
-						<div class="form-group">
-						<label for="materno" class="control-label">Telefono </label>
-						<input type="text" class="form-control" id="fiador_telefono" name="fiador_telefono"
-						value="{{{ isset($cliente->fiador_telefono ) ? $cliente->fiador_telefono  : old('fiador_telefono') }}}" maxlength="10">
-						<div class="label label-danger">{{ $errors->first("fiador_telefono") }}</div>
-						</div>
-					</div>
-					<!-- Materno End -->
-
-					<!-- Materno Start -->
-					<div class="col-md-6">
-					<div class="form-group">
-					<label for="materno" class="control-label">Celular </label>
-					<input type="text" class="form-control" id="fiador_celular" name="fiador_celular"
-					value="{{{ isset($cliente->fiador_celular ) ? $cliente->fiador_celular  : old('fiador_celular') }}}" maxlength="10">
-					<div class="label label-danger">{{ $errors->first("fiador_celular") }}</div>
-					</div>
-					</div>
-					<!-- Materno End -->
-
-				</div>
-
-				<div class="row">
-
-					<!-- Calle Start -->
-					<div class="col-md-12">
-					<div class="form-group">
-					<label for="calle" class="control-label"> Domicilio </label>
-					<input type="text" class="form-control" id="fiador_calle" name="fiador_calle"
-					value="{{{ isset($cliente->fiador_calle ) ? $cliente->fiador_calle  : old('fiador_calle') }}}" maxlength="150">
-					<div class="label label-danger">{{ $errors->first("calle") }}</div>
-					</div>
-					</div>
-					<!-- Calle End -->
-
-					<input type="hidden" class="form-control" id="fiador_latitud" name="fiador_latitud" value="{{{ isset($cliente->fiador_latitud ) ? $cliente->fiador_latitud  : old('fiador_latitud') }}}" maxlength="150">
-					<input type="hidden" class="form-control" id="fiador_longitud" name="fiador_longitud" value="{{{ isset($cliente->fiador_longitud ) ? $cliente->fiador_longitud  : old('fiador_longitud') }}}" maxlength="150">
-
-				</div>
-
-				<div class="row">
-
-					<div id="avalMap" class="map"></div>
-
-				</div>
-
-			</div>
-
-		</div>
-	</div>
-</div>
-
-</div>
-
-<div class="col-sm-12">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Expediente de Solicitud
-		</div>
-		<div class="panel-wrapper collapse in" aria-expanded="true">
-			<div class="panel-body">
-
-			   <div class="row" id="documentacion">
-
-         </div>
-
-			</div>
-
-		</div>
-	</div>
-</div>
 
 @section('scripts')
 <script>
@@ -1641,6 +1680,7 @@ function validarNombrecompleto(){
 
 
 </script>
+
 <!-- src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyBpZATF1F7TFEPCMxIx8nOPD0Ryi3V0BsE&callback=initMap" -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCv4GHAnI4evPz2WDIBoJ8YnEYU7DAyIPU&libraries=places&callback=initMap">
 </script>
@@ -1652,4 +1692,95 @@ function validarNombrecompleto(){
 <!-- FormValidation plugin and the class supports validating Bootstrap form -->
 <script src="{{asset('themes/plugins/bower_components/jquery-wizard-master/libs/formvalidation/formValidation.min.js')}}"></script>
 <script src="{{asset('themes/plugins/bower_components/jquery-wizard-master/libs/formvalidation/bootstrap.min.js')}}"></script>
+
+<script type="text/javascript">
+
+$('#exampleBasic2').wizard({
+
+    /*
+    onInit: function() {
+        $('#validation').formValidation({
+            framework: 'bootstrap',
+            fields: {
+              asesor_id: {
+                validators: {
+                  notEmpty: {
+                    message: 'Es necesario seleccione el Asesor'
+                  }
+                }
+              },
+              agente_id: {
+                validators: {
+                  notEmpty: {
+                    message: 'Es necesario seleccione un Agente'
+                  }
+                }
+              },
+                nombre: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The username is required'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'The username must be more than 6 and less than 30 characters long'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: 'The username can only consist of alphabetical, number, dot and underscore'
+                        }
+                    }
+                },
+                correo: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email address is required'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                },
+
+            }
+        });
+    },
+    validator: function() {
+        var fv = $('#validation').data('formValidation');
+
+        var $this = $(this);
+
+        // Validate the container
+        fv.validateContainer($this);
+
+        var isValidStep = fv.isValidContainer($this);
+        if (isValidStep === false || isValidStep === null) {
+            return false;
+        }
+
+        return true;
+    },
+    */
+    onFinish: function() {
+        $('#validation').submit();
+        swal("Message Finish!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.");
+    },
+    templates: {
+                buttons: function() {
+                    var options = this.options;
+                    return '<div class="panel-footer"><ul class="pager">' +
+                        '<li class="previous">' +
+                        '<a href="#' + this.id + '" data-wizard="back" role="button">Atras</a>' +
+                        '</li>' +
+                        '<li class="next">' +
+                        '<a href="#' + this.id + '" data-wizard="next" role="button">Siguiente</a>' +
+                        '<a href="#' + this.id + '" data-wizard="finish" role="button">Terminar</a>' +
+                        '</li>' +
+                        '</ul></div>';
+                }
+            },
+});
+
+</script>
 @endsection

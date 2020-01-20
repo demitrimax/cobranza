@@ -14,6 +14,7 @@
         </div>
         <!-- /.col-lg-12 -->
       </div>
+      
 
       <div class="row">
         <form action="<?php echo url('/'); ?>/admin/solicitudes/add" id="formValidation" method="post" enctype="multipart/form-data">
@@ -39,7 +40,6 @@
             </div>
 
           </div>
-
 
 
           <div class="col-sm-12">
