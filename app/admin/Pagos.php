@@ -159,7 +159,7 @@ class Pagos extends Model
     public function insertaLayout($request) {
 
       $layout_id = DB::table('layouts')->insertGetId([
-                                                      'asesor_id'   => $request->input('asesor_id') != "" ? $request->input('asesor_id') : "",
+                                                      'asesor_id'   => $request->input('agente_id') != "" ? $request->input('agente_id') : "",
                                                       'alias'       => $request->input('alias') != "" ? $request->input('alias') : "",
                                                       'fecha'       => date('Y-m-d'),
                                                       'status'      => 1

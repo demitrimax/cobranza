@@ -585,10 +585,11 @@ class CreditosController extends Controller
           $q->where('agente_id', $id);
       })->where('status',2)->get();
 
+
       //dd($creditos);
       if(!empty($creditos)) {
 
-        foreach($creditos as $credito) {
+        foreach($creditos->sortBy('cliente.nombrecompleto') as $credito) {
 
           //Obtenemos las cuotas pendientes de pagar apartir de la fecha de hoy
           $html .= '<tr>

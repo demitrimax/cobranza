@@ -44,15 +44,15 @@
           <div class="col-sm-12">
 
             <div class="panel panel-default">
-              <div class="panel-heading">Seleccione de Asesores y layouts</div>
+              <div class="panel-heading">Seleccione Agentes y layouts</div>
               <div class="panel-wrapper collapse in">
                   <div class="panel-body">
                     <!-- Monto_solicitado Start -->
             				<div class="col-md-12">
             				 <div class="form-group">
-            					 <select class="form-control" id="asesor_id" name="asesor_id">
+            					 <select class="form-control" id="agente_id" name="agente_id">
             						 <option value="">---Seleccione el asesor---</option>
-            						 <?php foreach($asesores as $value) { ?>
+            						 <?php foreach($agentes as $value) { ?>
             							 <option value="<?php echo $value->id; ?>">
             								 <?php echo $value->nombre; ?>
             							 </option>
@@ -166,7 +166,7 @@ $('#btnSave').on('click',function(){
 
 });
 
-$('#asesor_id').on('change',function(){
+$('#agente_id').on('change',function(){
 
   if($(this).val() != "") {
 

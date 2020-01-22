@@ -221,6 +221,8 @@ class PagosController extends Controller
 
       $pagos = new \App\admin\Pagos;
 
+      $agentes = \App\admin\Agentes::where('status', 1)->get();
+
       $config = array();
 
       $config['titulo'] = "Generar Layout de Pagos";
@@ -250,13 +252,13 @@ class PagosController extends Controller
                                         ->where('asesor_id',0)
                                         ->get();
 
-      return view('admin/pagos/apply', ['config'=>$config,'asesores'=>$pagos->getAll('asesores'),'sinAsesor' => $sinAsesor]);
+      return view('admin/pagos/apply', ['config'=>$config, 'agentes'=>$agentes,'sinAsesor' => $sinAsesor]);
 
     }
 
     public function getActiveLayouts($id) {
 
-      $layouts = DB::table('layouts')->where('status',1)->get();
+      $layouts = DB::table('layouts')->where('status',1)->where('asesor_id', $id)->get();
 
       if($layouts) {
 
@@ -270,7 +272,7 @@ class PagosController extends Controller
 
       } else {
 
-        return array('error' => 1, 'msg' => 'No se encontaron archivos de cobranza para este asesor');
+        return array('error' => 1, 'msg' => 'No se encontaron archivos de cobranza para este agente');
 
       }
 
