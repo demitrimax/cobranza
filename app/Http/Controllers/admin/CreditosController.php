@@ -579,4 +579,34 @@ class CreditosController extends Controller
 
     }
 
+    public function getByAgente($id)
+    {
+      $creditos = \App\admin\creditos::whereHas('solicitud', function($q) use ($id) {
+          $q->where('agente_id', $id);
+      })->where('status',2)->get();
+
+      //dd($creditos);
+      if(!empty($creditos)) {
+
+        foreach($creditos as $credito) {
+
+          //Obtenemos las cuotas pendientes de pagar apartir de la fecha de hoy
+          $html .= '<tr>
+                      <td><input class="select_all" type="checkbox" value="' . $credito->id . '" name="creditos[]" onclick="checador(this.checked)" /></td>
+                      <td>' . $credito->cliente->nombre . ' ' . $credito->cliente->paterno . ' ' . $credito->cliente->materno . '</td>
+                      <td>' . $credito->cliente->calle . ' ' . $credito->cliente->colonia . ' ' . $credito->cliente->ciudad . ' ' . $credito->cliente->estado . ' Cp: ' . $credito->cliente->cp . '</td>
+                      <td> $ ' . number_format($credito->actual,2,".",",") . '</td>
+                      <td> $ ' . number_format($credito->pago,2,".",",") . '</td>
+                    <tr>';
+        }
+
+        return array('error' => 0, 'msg' => '', 'html' => $html);
+
+      } else {
+
+        return array('error' => 1, 'msg' => 'No se encontraron creditos asignados para este asesor', 'html' => '');
+
+      }
+    }
+
 }

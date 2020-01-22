@@ -255,6 +255,7 @@ Route::get("/admin/creditos/buscar", "admin\CreditosController@getSearch")->midd
 Route::get("/admin/creditos/seleccion/{id}", "admin\CreditosController@getSeleccion")->middleware('auth');
 
 Route::get("/admin/creditos/byAsesor/{id}", "admin\CreditosController@getByAsesor")->middleware('auth');
+Route::get("/admin/creditos/byAgente/{id}", "admin\CreditosController@getByAgente")->middleware('auth');
 
   //  EO : Creditos
 

@@ -285,6 +285,10 @@
                                          <td>Interés aprobado</td>
                                          <td>$ {{{ round($solicitud->interes_registro,2) }}}</td>
                                        </tr>
+                                       <tr>
+                                         <td>Agente</td>
+                                         <td> {{ $solicitud->agente->nombre.'('.$solicitud->agente_id.')' }}</td>
+                                       </tr>
                                      </table>
                                    </div>
                                    <div class="col-md-5 pull-right">

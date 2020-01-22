@@ -175,9 +175,11 @@
 
 <input type="hidden" class="form-control" id="status" name="status" value="1">
 
+<!--Prueba -->
+@section('scripts')
 <script>
 
-$('#buscar').on('click',function(){
+	$('#buscar').on('click',function(){
 
 	var parametros = '?credito_id=' + $('#credito').val();
 
@@ -263,3 +265,4 @@ function seleccionar(id) {
 
 }
 </script>
+@endsection

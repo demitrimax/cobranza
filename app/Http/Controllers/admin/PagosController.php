@@ -168,6 +168,8 @@ class PagosController extends Controller
     public function getGenerate() {
 
       $pagos = new \App\admin\Pagos;
+      //$agentes_creditos = App\admin\creditos::
+      $agentes = \App\admin\Agentes::all();
 
       $config = array();
 
@@ -198,7 +200,7 @@ class PagosController extends Controller
                                         ->where('asesor_id',0)
                                         ->get();
 
-      return view('admin/pagos/layout', ['config'=>$config,'asesores'=>$pagos->getAll('asesores'),'sinAsesor' => $sinAsesor]);
+      return view('admin/pagos/layout', ['config'=>$config,'agentes'=>$agentes,'sinAsesor' => $sinAsesor]);
 
     }
 

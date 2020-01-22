@@ -554,6 +554,10 @@ class Solicitudes extends Model
     }
     public function telefonos()
     {
-      return $this->belongsToMany('App\Models\ctelefonos', 'cliente_id', '');
+      return $this->belongsToMany('App\admin\ctelefonos', 'cliente_id', '');
+    }
+    public function agente()
+    {
+      return $this->belongsTo('App\admin\Agentes', 'agente_id');
     }
 }

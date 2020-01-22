@@ -119,6 +119,8 @@
 
 </div>
 
+@endsection
+@push('scripts')
 <script>
 
 var contador = 0;
@@ -233,6 +235,4 @@ $('#layout_id').on('change',function(){
 
 
 </script>
-
-
-@endsection
+@endpush

@@ -52,15 +52,15 @@
           <div class="col-sm-12">
 
             <div class="panel panel-default">
-              <div class="panel-heading">Seleccione de Asesores</div>
+              <div class="panel-heading">Seleccione un Agente</div>
               <div class="panel-wrapper collapse in">
                   <div class="panel-body">
                     <!-- Monto_solicitado Start -->
             				<div class="col-md-12">
             				 <div class="form-group">
-            					 <select class="form-control" id="asesor_id" name="asesor_id">
+            					 <select class="form-control" id="agente_id" name="agente_id">
             						 <option value="">---Seleccione---</option>
-            						 <?php foreach($asesores as $value) { ?>
+            						 <?php foreach($agentes as $value) { ?>
             							 <option value="<?php echo $value->id; ?>">
             								 <?php echo $value->nombre; ?>
             							 </option>
@@ -123,7 +123,9 @@
   </div>
 
 </div>
+@endsection
 
+@section('scripts')
 <script>
 
 var contador = 0;
@@ -156,12 +158,12 @@ $('#btnSave').on('click',function(){
 
 });
 
-$('#asesor_id').on('change',function(){
+$('#agente_id').on('change',function(){
 
   if($(this).val() != "") {
 
     $.ajax({
-      url: "<?php echo url('admin/creditos/byAsesor/'); ?>/" +  $(this).val(),
+      url: "<?php echo url('admin/creditos/byAgente/'); ?>/" +  $(this).val(),
       dataType: 'json',
       contentType: "application/json; charset=utf-8",
       success: function(json) {

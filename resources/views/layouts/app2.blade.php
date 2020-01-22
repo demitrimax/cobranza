@@ -479,6 +479,7 @@ if (Auth::check()) {
     @yield('beforeBody')
 
     @yield('scripts')
+    @stack('scripts')
 </body>
 
 </html>

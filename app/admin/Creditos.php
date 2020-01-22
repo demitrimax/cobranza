@@ -682,4 +682,13 @@ class Creditos extends Model
       }
 
     }
+    public function solicitud()
+    {
+      return $this->belongsTo('App\admin\Solicitudes', 'solicitud_id');
+    }
+    public function cliente()
+    {
+      return $this->belongsTo('App\admin\Clientes', 'cliente_id');
+    }
+
 }
