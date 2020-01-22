@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -12,7 +12,6 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 
 
 <!-- Page Content -->
-<div id="page-wrapper">
 
   <div class="container-fluid">
 
@@ -83,30 +82,30 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
 						<td>Hora_pago</td>
 						<td>Monto_pago</td>
 						<td>Status</td>
-						
+
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php foreach($data as $value) { ?>
                         <tr id="hide<?php $value->id; ?>" >
-                          
+
             <th>
             <?php if(!empty($value->cliente_id)){ echo $value->cliente_id; }?>
             </th>
-                        
+
             <th>
             {{{ $value->fecha_pago }}}
             </th>
-                
+
             <th>
             {{{ $value->hora_pago }}}
             </th>
-                
+
             <th>
             {{{ $value->monto_pago }}}
             </th>
-                
+
             <th>
             {{{ $value->status }}}
             </th>
@@ -196,8 +195,9 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
         </div>
     </div>
 </div>
+@endsection
 
-
+@section('scripts')
 <script>
 $('#btnFilter').on('click',function(){
 
