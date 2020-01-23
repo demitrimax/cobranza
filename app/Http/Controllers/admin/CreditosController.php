@@ -432,7 +432,7 @@ class CreditosController extends Controller
     }
 
     public function getSearch(Request $request) {
-
+      
       $multiple = 1;
 
       if($request->input('credito_id') != "") {
@@ -444,9 +444,23 @@ class CreditosController extends Controller
 
         $html = '';
 
-        $creditos = new \App\admin\Creditos;
+        //$creditos = new \App\admin\Creditos;
 
-        $data = $creditos->getCreditos($request->input('credito_id'));
+        $creditos = DB::table('creditos')->select(array('creditos.*' ,
+                                                        'clientes.nombre',
+                                                        'clientes.paterno',
+                                                        'clientes.materno',
+                                                        'clientes.calle',
+                                                        'clientes.colonia',
+                                                        'clientes.ciudad',
+                                                        'clientes.estado',
+                                                        'clientes.cp'))
+                                         ->join('clientes','clientes.id','creditos.cliente_id')
+                                         ->where('creditos.status',2)
+                                         ->where('creditos.id', $request->input('credito_id'))->first();
+
+        $data = $creditos;//$creditos->getCreditos($request->input('credito_id'));
+
 
       } else {
         //La busqueda es por nombre y apellidos, podems mandar mas de un registro a resultados
