@@ -123,7 +123,7 @@
 					<div class="col-md-12">
 					 <div class="form-group">
 						<label for="fecha_pago" class="control-label"> Fecha del Pago </label>
-							<input type="text" class="form-control dates" id="fecha_pago" name="fecha_pago"
+							<input type="text" class="form-control datepicker-here" data-language= "es" id="fecha_pago" data-date-format= "mm/dd/yyyy" name="fecha_pago"
 							value="{{{ isset($data->fecha_pago ) ? $data->fecha_pago  : old('fecha_pago') }}}">
 							<div class="label label-danger">{{ $errors->first("fecha_pago") }}</div>
 					 </div>
@@ -174,9 +174,13 @@
 </div>
 
 <input type="hidden" class="form-control" id="status" name="status" value="1">
-
+@push('css')
+<link href="{{asset('themes/airdatepicker/dist/css/datepicker.min.css')}}" rel="stylesheet" type="text/css">
+@endpush
 <!--Prueba -->
 @section('scripts')
+<script src="{{asset('themes/airdatepicker/dist/js/datepicker.min.js')}}"></script>
+<script src="{{asset('themes/airdatepicker/dist/js/i18n/datepicker.es.js')}}"></script>
 <script>
 
 	$('#buscar').on('click',function(){

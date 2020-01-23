@@ -100,7 +100,7 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <th><input type="checkbox" onclick="$('.select_all').attr('checked',this.checked)" /></th>
+                            <th><input type="checkbox" onclick="checardorAll()" /></th>
                             <th>Cliente</th>
                             <th>Direccion</th>
                             <th>Saldo Actual</th>
@@ -139,6 +139,11 @@ function checador(valor){
   }
 
 };
+
+function checardorAll(){
+  $('.select_all').attr('checked', 1);
+  contador++;
+}
 
 $('#btnSave').on('click',function(){
 
