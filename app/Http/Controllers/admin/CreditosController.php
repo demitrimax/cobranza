@@ -581,7 +581,7 @@ class CreditosController extends Controller
 
     public function getByAgente($id)
     {
-      $creditos = \App\admin\creditos::whereHas('solicitud', function($q) use ($id) {
+      $creditos = \App\admin\Creditos::whereHas('solicitud', function($q) use ($id) {
           $q->where('agente_id', $id);
       })->where('status',2)->get();
 
