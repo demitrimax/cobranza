@@ -463,7 +463,7 @@ Route::post("/admin/expediente_digital/validar_expediente", "admin\Expediente_di
 						    //  EO : Agentes
 
 						   // @@@@@#####@@@@@
-
+               Route::get('admin/manual', 'HomeController@ManualIndex')->middleware('auth');
 
 
 

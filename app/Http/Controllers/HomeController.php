@@ -234,4 +234,9 @@ class HomeController extends Controller
       return view('welcome0');
     }
 
+    public function ManualIndex()
+    {
+      return view('admin.manual.index');
+    }
+
 }
