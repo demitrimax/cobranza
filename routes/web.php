@@ -180,6 +180,10 @@ Route::post("/admin/solicitudes/deleteAll", "admin\SolicitudesController@deleteA
 Route::get("/admin/solicitudes", "admin\SolicitudesController@index")->middleware('auth');
 Route::get("/admin/solicitudes/add", "admin\SolicitudesController@getAdd")->middleware('auth');
 Route::post("/admin/solicitudes/add", "admin\SolicitudesController@postAdd")->middleware('auth');
+
+Route::get('/admin/solicitudes/{id}/refinanciar/{clientid}', 'admin\SolicitudesController@refinanciar')->middleware('auth');
+Route::post('admin/solicitudes/refinanciar', 'admin\SolicitudesController@refinanciarCredito')->middleware('auth');
+
 Route::get("/admin/solicitudes/edit/{id}", "admin\SolicitudesController@getEdit")->middleware('auth');
 Route::get("/admin/solicitudes/status/{field}/{id}", "admin\SolicitudesController@status")->middleware('auth');
 Route::get("/admin/solicitudes/export/{type}", "admin\SolicitudesController@getExport")->middleware('auth');

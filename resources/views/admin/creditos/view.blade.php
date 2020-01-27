@@ -538,7 +538,7 @@ function renovar() {
   }, function(isConfirm){
       if (isConfirm) {
 
-        location =  "{{ url('admin/solicitudes/add/?credito_id=' . $data->id) }}";
+        location =  "{{ url('admin/solicitudes/'.$data->id.'/refinanciar/' . $cliente->id) }}";
 
       } else {
 

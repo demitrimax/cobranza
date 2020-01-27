@@ -1169,5 +1169,170 @@ class SolicitudesController extends Controller
         return $resultado;
     }
 
+    public function refinanciar($id, $clientid)
+    {
+
+      $config = array();
+
+      $config['titulo'] = "Refinanciamiento de Crédito";
+
+      $config['cancelar'] = url('/admin/solicitudes');
+
+      $config['breadcrumbs'][] = array(
+          'text' => "Escritorio",
+          'href' => url('/'),
+          'active' => false
+      );
+
+      $config['breadcrumbs'][] = array(
+          'text' => "Listado de solicitudes",
+          'href' => url('/admin/solicitudes'),
+          'active' => false
+      );
+
+      $config['breadcrumbs'][] = array(
+          'text' => "Refinanciar",
+          'href' => url('/admin/solicitudes/add'),
+          'active' => true
+      );
+      $cliente = \App\admin\Clientes::find($clientid);
+      $credito = \App\admin\Creditos::find($id);
+      if(empty($credito)){
+        Session::flash('fracaso', 'true');
+        Session::flash('message', 'No se encontraron datos del credito');
+        return back();
+      }
+      if(empty($cliente)){
+        Session::flash('fracaso', 'true');
+        Session::flash('message', 'No se encontraron datos del cliente');
+        return back();
+      }
+      $solicitudes  = new \App\admin\Solicitudes;
+      $productos = $solicitudes->getAll('productos');
+      $asesores = $solicitudes->getAll('asesores');
+
+      return view('admin.creditos.refinanciar')->with(compact('cliente', 'config', 'credito', 'productos', 'asesores'));
+    }
+
+    public function refinanciarCredito(Request $request)
+    {
+        $input = $request->all();
+
+          $solicitudes  = new \App\admin\Solicitudes;
+
+          $cliente     =  \App\admin\Clientes::find($input['cliente_id']);
+
+          $creditos     = new \App\admin\Creditos;
+
+
+          $rules = [
+            'documento' => 'file|size:2500'
+          ];
+          $messages = [
+            'documento.size'  => 'El documento no puede exdecer de más de: $size'
+          ];
+          $this->validate($request, $rules, $messages);
+
+          //$cliente_id = $clientes->addClientes($request);
+          $cliente_id = $cliente->id;
+          //dd($request);
+
+          if($request->input('prospecto_id') != 0) {
+
+            $prospectos = new \App\admin\Prospectos;
+
+            $prospectos->bajaProspecto($request->input('prospecto_id'));
+
+          }
+
+          $solicitud_id = $solicitudes->addSolicitudes($request, $cliente_id);
+
+          if($request->file('documentos')) {
+
+            foreach($request->file('documentos') as $key => $docs) {
+
+              $fotografia_name='';
+
+              $fotografia_file = $docs['documento'];
+
+
+              if(!is_null($fotografia_file) && in_array($fotografia_file->getClientOriginalExtension(), $this->allow_image)){
+
+                  $fotografia_name    = time().'_'.$fotografia_file->getClientOriginalName();
+
+                  $mime               = $fotografia_file->getClientMimeType();
+
+                  $fotografia_file->move('uploads',$fotografia_name);
+
+                  //Insertamos documento al expediente
+                  DB::table('solicitudes_expediente')->insert([
+
+                    'archivo' => $fotografia_name,
+
+                    'carga_id' => Auth::id(),
+
+                    'documento_id' => $key,
+
+                    'fecha_carga' => date('Y-m-d'),
+
+                    'mime' => $mime,
+
+                    'solicitud_id' => $solicitud_id,
+
+                    'status' => 1,
+
+                    'valida_id' => 0,
+
+                    'aprobado' => 0,
+
+                  ]);
+
+              }
+
+            }
+
+          }
+
+          $informacion = $solicitudes->getSolicitudes($solicitud_id);
+
+          $interes = ($informacion->monto_aprobado * ((float)$request->input('interes_registro')/100));
+
+          //Creamos elcredito de la solicitud
+          $data = array(
+
+            'vendedor_id'      => (int)$informacion->asesor_id,
+
+            'cliente_id'      => $informacion->cliente_id,
+
+            'solicitud_id'    => $informacion->id,
+
+            'folio'           => time(),
+
+            'plazo'           => $informacion->plazo_aprobado,
+
+            'monto'           => $informacion->monto_aprobado,
+
+            'pago'            => $informacion->pago_aprobado,
+
+            'porcentaje'      => $informacion->interes_registro,
+
+            'interes'         => $interes,
+
+            'insoluto'        => ($interes + $informacion->monto_aprobado),
+
+            'status'          => 1,
+
+            'recargos'        => $request->input('recargos')
+
+
+          );
+
+          $creditos->crearCredito($data);
+
+          $request->session()->flash('message', 'solicitudes Agregado exitosamente!');
+          $request->session()->flash('exito', 'true');
+          return redirect()->action('admin\SolicitudesController@index');
+    }
+
 
 }
