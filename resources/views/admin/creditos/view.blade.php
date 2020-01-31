@@ -21,7 +21,7 @@
 
             <?php if($data->status == 2) { ?>
               <div class="pull-left">
-                <button onclick="renovar()" class="btn btn-success">
+                <button onclick="renovar()" class="btn btn-success {!! $porcentajepagado < 80 ? 'disabled' : '' !!}" >
                     <i class="fa fa-recycle fa-2x"></i><br/>Refinanciar
                 </button>
               </div>
@@ -46,7 +46,7 @@
                 <!-- .row -->
                 <div class="row text-center m-t-10">
                   <div class="col-md-6"><strong>Cliente</strong>
-                      <p>{{{ $cliente->nombre }}} {{{ $cliente->paterno }}} {{{ $cliente->materno }}}</p>
+                      <p title="Cliente Id:{{$cliente->id}}">{{{ $cliente->nombre }}} {{{ $cliente->paterno }}} {{{ $cliente->materno }}}</p>
                   </div>
                     <div class="col-md-6"><strong>Teléfono</strong>
                         <p>{{{ $cliente->telefono }}}</p>
@@ -284,6 +284,10 @@
                                        <tr>
                                          <td>Interés aprobado</td>
                                          <td>$ {{{ round($solicitud->interes_registro,2) }}}</td>
+                                       </tr>
+                                       <tr>
+                                         <td>Porcentaje del Crédito pagado</td>
+                                         <td> {{{ round( $porcentajepagado) }}}%</td>
                                        </tr>
                                        <tr>
                                          <td>Agente</td>
@@ -525,6 +529,7 @@ $('#modalVistaDocumento').on('hidden.bs.modal', function(e){
 });
 
 function renovar() {
+  @if($porcentajepagado > 79 )
   swal({
       title: " ¿ Refinanciar Credito ?",
       text: "Este credito sera saldado y generado en una nueva solicitud para fondeo, ¿ Desea continuar ?",
@@ -544,6 +549,18 @@ function renovar() {
 
       }
   });
+  @else
+  swal({
+      icon: 'error',
+      title: 'Lo sentimos!',
+      text: 'No se puede refinanciar un crédito que no haya pagado el 80% de su totalidad',
+      footer: '<a href>Why do I have this issue?</a>'
+    })
+  @endif
 }
+
+        $("[rel='tooltip']").tooltip();
+        $('[data-toggle="tooltip"]').tooltip()
+
 </script>
 @endsection

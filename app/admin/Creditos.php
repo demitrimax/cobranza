@@ -682,6 +682,13 @@ class Creditos extends Model
       }
 
     }
+    public function getPorcentajepagado($credito_id)
+    {
+      $pagado = Pagos::where('credito_id', $credito_id)->sum('monto_pago');
+      $credito = Creditos::find($credito_id);
+      $monto_credito = $credito->insoluto;
+      return (int)(($pagado/$monto_credito) * 100);
+    }
     public function solicitud()
     {
       return $this->belongsTo('App\admin\Solicitudes', 'solicitud_id');

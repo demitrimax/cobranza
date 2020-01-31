@@ -372,6 +372,8 @@ class CreditosController extends Controller
 
           'cuotas' => $creditos->getCuotas($id),
 
+          'porcentajepagado' => $creditos->getPorcentajepagado($id),
+
           'documentos' => \App\admin\Documentos::where('status', 1)->whereIn('producto_id',array(0,$solicitud->producto_id))->get()
 
          ]);
@@ -432,7 +434,7 @@ class CreditosController extends Controller
     }
 
     public function getSearch(Request $request) {
-      
+
       $multiple = 1;
 
       if($request->input('credito_id') != "") {
