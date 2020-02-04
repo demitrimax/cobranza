@@ -10,7 +10,6 @@ class ctelefonos extends Model
     //
     protected $table = 'ctelefonos';
     protected $primaryKey = 'id';
-    public $timestamps = false;
 
 
     protected $casts = [

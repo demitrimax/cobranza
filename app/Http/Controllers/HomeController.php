@@ -239,4 +239,32 @@ class HomeController extends Controller
       return view('admin.manual.index');
     }
 
+    public function parametros()
+    {
+      $parametros = \App\admin\Parametros::all();
+      return view('admin.parametros.index')->with(compact('parametros'));
+    }
+
+    public function parametrosave(Request $request)
+    {
+
+      $input = $request->all();
+      //dd($input);
+      $valores = $input['form'];
+      $ids = $input['idform'];
+      foreach($valores as $key=>$valor)
+      {
+
+        $idform = $ids[$key];
+        $myparametro = \App\admin\Parametros::find($idform);
+        if($myparametro->valor <> $valor){
+          $myparametro->valor = $valor;
+          $myparametro->save();
+        }
+        $misparametros[] = ['id'=>$idform, 'valor'=>$valor];
+      }
+      //dd($misparametros);
+      return back();
+    }
+
 }

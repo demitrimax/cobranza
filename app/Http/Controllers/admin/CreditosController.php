@@ -374,6 +374,8 @@ class CreditosController extends Controller
 
           'porcentajepagado' => $creditos->getPorcentajepagado($id),
 
+          'porcentaje_refinanciar'  => \App\admin\Parametros::where('parametro', 'porcentaje_refinanciar')->first(),
+
           'documentos' => \App\admin\Documentos::where('status', 1)->whereIn('producto_id',array(0,$solicitud->producto_id))->get()
 
          ]);
