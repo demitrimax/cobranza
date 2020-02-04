@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('title',config('app.name').' | Editar Permisos' )
 

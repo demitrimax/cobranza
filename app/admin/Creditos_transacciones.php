@@ -3,13 +3,16 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Creditos_transacciones extends Model
 {
+    use LogsActivity;
     protected $table = 'creditos_transacciones';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +47,7 @@ class Creditos_transacciones extends Model
     public function getCreditos_transaccionesView($id){
       $creditos_transacciones = Creditos_transacciones::select(array('creditos_transacciones.*'));
       $creditos_transacciones->where('creditos_transacciones.id', $id);
-      
+
       return $creditos_transacciones->get()[0];
 
     }
@@ -52,7 +55,7 @@ class Creditos_transacciones extends Model
     public function changeStatus($field, $id){
       $creditos_transacciones = $this->getCreditos_transacciones($id);
       if(count($creditos_transacciones)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +92,7 @@ class Creditos_transacciones extends Model
       $creditos_transacciones = Creditos_transacciones::select(array('creditos_transacciones.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +113,7 @@ class Creditos_transacciones extends Model
       $creditos_transacciones = Creditos_transacciones::select(array('creditos_transacciones.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){

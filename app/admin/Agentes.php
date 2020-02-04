@@ -3,13 +3,18 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Agentes extends Model
 {
+  use LogsActivity;
+
+
     protected $table = 'agentes';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();

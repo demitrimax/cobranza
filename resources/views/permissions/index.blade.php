@@ -1,10 +1,10 @@
 {{-- \resources\views\permissions\index.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('title',config('app.name').' | Permisos' )
 
 @section('css')
 <!-- DataTables -->
-<link rel="stylesheet" href="{{asset('appzia/plugins/datatables/dataTables.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('themes/plugins/bower_components/datatables/jquery.dataTables.min.css')}}">
 @endsection
 
 @section('content')
@@ -66,13 +66,13 @@
 @endsection
 @section('scripts')
 <!-- DataTables -->
-<script src="{{asset('appzia/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('appzia/plugins/datatables/dataTables.bootstrap.js')}}"></script>
+<script src="{{asset('themes/plugins/bower_components/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('themes/plugins/bower_components/datatables/dataTables.bootstrap.js')}}"></script>
 <script>
   $(function () {
     $('#permisos-table').DataTable({
       "language": {
-                "url": "{{asset('appzia/plugins/datatables/Spanish.json')}}"
+                "url": "{{asset('themes/plugins/bower_components/datatables/Spanish.json')}}"
             }
     })
   })

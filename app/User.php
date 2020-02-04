@@ -7,12 +7,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
     use SoftDeletes;
+    use LogsActivity;
     use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 
     /**
@@ -32,6 +34,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected static $logAttributes = ['*'];
 
     /**
      * The attributes that should be cast to native types.

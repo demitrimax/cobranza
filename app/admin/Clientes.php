@@ -4,13 +4,16 @@ namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Clientes extends Model
 {
+    use LogsActivity;
     protected $table = 'clientes';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     protected $casts = [
       'id'            => 'integer',

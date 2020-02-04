@@ -3,13 +3,16 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Dispersion extends Model
 {
+    use LogsActivity;
     protected $table = 'dispersion';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +47,7 @@ class Dispersion extends Model
     public function getDispersionView($id){
       $dispersion = Dispersion::select(array('dispersion.*'));
       $dispersion->where('dispersion.id', $id);
-      
+
       return $dispersion->get()[0];
 
     }
@@ -52,7 +55,7 @@ class Dispersion extends Model
     public function changeStatus($field, $id){
       $dispersion = $this->getDispersion($id);
       if(count($dispersion)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +92,7 @@ class Dispersion extends Model
       $dispersion = Dispersion::select(array('dispersion.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +113,7 @@ class Dispersion extends Model
       $dispersion = Dispersion::select(array('dispersion.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){

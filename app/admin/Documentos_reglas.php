@@ -3,13 +3,16 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Documentos_reglas extends Model
 {
+    use LogsActivity;
     protected $table = 'documentos_reglas';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +47,7 @@ class Documentos_reglas extends Model
     public function getDocumentos_reglasView($id){
       $documentos_reglas = Documentos_reglas::select(array('documentos_reglas.*'));
       $documentos_reglas->where('documentos_reglas.id', $id);
-      
+
       return $documentos_reglas->get()[0];
 
     }
@@ -52,7 +55,7 @@ class Documentos_reglas extends Model
     public function changeStatus($field, $id){
       $documentos_reglas = $this->getDocumentos_reglas($id);
       if(count($documentos_reglas)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +92,7 @@ class Documentos_reglas extends Model
       $documentos_reglas = Documentos_reglas::select(array('documentos_reglas.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +113,7 @@ class Documentos_reglas extends Model
       $documentos_reglas = Documentos_reglas::select(array('documentos_reglas.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){

@@ -7,13 +7,16 @@ use App\admin\Creditos_cuotas;
 use App\admin\Creditos_transacciones;
 use App\admin\Pagos;
 use Auth;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Creditos extends Model
 {
+    use LogsActivity;
     protected $table = 'creditos';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();

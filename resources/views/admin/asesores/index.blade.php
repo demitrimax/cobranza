@@ -180,8 +180,9 @@ $redirect = url('/').'/admin/documentos?'.urlencode($_SERVER["QUERY_STRING"]);
         </div>
     </div>
 </div>
+@endsection
 
-
+@section('scripts')
 <script>
 $('#btnFilter').on('click',function(){
 

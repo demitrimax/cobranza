@@ -3,13 +3,16 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Creditos_pagos extends Model
 {
+    use LogsActivity;
     protected $table = 'creditos_pagos';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +47,7 @@ class Creditos_pagos extends Model
     public function getCreditos_pagosView($id){
       $creditos_pagos = Creditos_pagos::select(array('creditos_pagos.*'));
       $creditos_pagos->where('creditos_pagos.id', $id);
-      
+
       return $creditos_pagos->get()[0];
 
     }
@@ -52,7 +55,7 @@ class Creditos_pagos extends Model
     public function changeStatus($field, $id){
       $creditos_pagos = $this->getCreditos_pagos($id);
       if(count($creditos_pagos)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +92,7 @@ class Creditos_pagos extends Model
       $creditos_pagos = Creditos_pagos::select(array('creditos_pagos.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +113,7 @@ class Creditos_pagos extends Model
       $creditos_pagos = Creditos_pagos::select(array('creditos_pagos.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){

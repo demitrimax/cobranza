@@ -1,5 +1,5 @@
 {{-- \resources\views\permissions\create.blade.php --}}
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('title',config('app.name').' | Alta de Permisos' )
 

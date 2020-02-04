@@ -3,13 +3,16 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Creditos_cuotas extends Model
 {
+    use LogsActivity;
     protected $table = 'creditos_cuotas';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +47,7 @@ class Creditos_cuotas extends Model
     public function getCreditos_cuotasView($id){
       $creditos_cuotas = Creditos_cuotas::select(array('creditos_cuotas.*'));
       $creditos_cuotas->where('creditos_cuotas.id', $id);
-      
+
       return $creditos_cuotas->get()[0];
 
     }
@@ -52,7 +55,7 @@ class Creditos_cuotas extends Model
     public function changeStatus($field, $id){
       $creditos_cuotas = $this->getCreditos_cuotas($id);
       if(count($creditos_cuotas)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +92,7 @@ class Creditos_cuotas extends Model
       $creditos_cuotas = Creditos_cuotas::select(array('creditos_cuotas.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +113,7 @@ class Creditos_cuotas extends Model
       $creditos_cuotas = Creditos_cuotas::select(array('creditos_cuotas.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
