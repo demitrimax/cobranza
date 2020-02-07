@@ -3,13 +3,17 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Plazos extends Model
 {
+    use LogsActivity;
+
     protected $table = 'plazos';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +48,7 @@ class Plazos extends Model
     public function getPlazosView($id){
       $plazos = Plazos::select(array('plazos.*'));
       $plazos->where('plazos.id', $id);
-      
+
       return $plazos->get()[0];
 
     }
@@ -52,7 +56,7 @@ class Plazos extends Model
     public function changeStatus($field, $id){
       $plazos = $this->getPlazos($id);
       if(count($plazos)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +93,7 @@ class Plazos extends Model
       $plazos = Plazos::select(array('plazos.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +114,7 @@ class Plazos extends Model
       $plazos = Plazos::select(array('plazos.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){

@@ -3,6 +3,7 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Solicitudes_expediente extends Model
 {
@@ -10,6 +11,8 @@ class Solicitudes_expediente extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $allow_image = array('png', 'jpg', 'jpeg', 'gif');
+    use LogsActivity;
+    protected static $logAttributes = ['*'];
 
     public function getAll($table){
       return DB::table($table)->where('status',1)->get();
@@ -44,7 +47,7 @@ class Solicitudes_expediente extends Model
     public function getSolicitudes_expedienteView($id){
       $solicitudes_expediente = Solicitudes_expediente::select(array('solicitudes_expediente.*'));
       $solicitudes_expediente->where('solicitudes_expediente.id', $id);
-      
+
       return $solicitudes_expediente->get()[0];
 
     }
@@ -52,7 +55,7 @@ class Solicitudes_expediente extends Model
     public function changeStatus($field, $id){
       $solicitudes_expediente = $this->getSolicitudes_expediente($id);
       if(count($solicitudes_expediente)){
-        
+
             return true;
       } else{
         return false;
@@ -89,7 +92,7 @@ class Solicitudes_expediente extends Model
       $solicitudes_expediente = Solicitudes_expediente::select(array('solicitudes_expediente.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){
@@ -110,7 +113,7 @@ class Solicitudes_expediente extends Model
       $solicitudes_expediente = Solicitudes_expediente::select(array('solicitudes_expediente.*'));
 
       //join
-        
+
 
         // where condition
         if($searchBy!='' && $searchValue!=''){

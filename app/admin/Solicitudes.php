@@ -4,9 +4,12 @@ namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Solicitudes extends Model
 {
+    use LogsActivity;
+    protected static $logAttributes = ['*'];
     protected $table = 'solicitudes';
     protected $primaryKey = 'id';
     public $timestamps = false;

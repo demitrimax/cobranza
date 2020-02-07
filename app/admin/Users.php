@@ -3,9 +3,12 @@
 namespace App\admin;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Users extends Model
 {
+    use LogsActivity;
+    protected static $logAttributes = ['*'];
     protected $table = 'users';
     protected $primaryKey = 'id';
     public $timestamps = false;
